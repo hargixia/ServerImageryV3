@@ -20,7 +20,7 @@
     </li>
 
     <li class="nav-item">
-        <button class="btn btn-danger" style="width:100%;text-align:left;padding-left:16px" wire:click='logout'>Logout</button>
+        <a href="/logout" class="btn btn-danger" style="width:100%;text-align:left;padding-left:16px">Logout</a>
     </li>
 
 </ul>

@@ -29,6 +29,8 @@ route::middleware('auth')->group(function(){
     route::get('/materi/detail/{id}/kuisoner',WebKuisonerTambah::class);
 
     route::get('/pengguna',WebPengguna::class);
+
+    route::get('/logout', [WebLogin::class, 'logout']);
 });
 
 route::get('/api/login/{data}',[api_auth::class , 'login']);

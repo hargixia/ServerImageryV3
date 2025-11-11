@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
+use PHPUnit\Event\Tracer\Tracer;
 
 class WebLogin extends Component
 {
@@ -18,6 +19,13 @@ class WebLogin extends Component
     public $password = '';
 
     public $user;
+
+    public function logout()
+    {
+        Auth::logout();
+        session()->flush();
+        return redirect()->to('/login');
+    }
 
     public function login_act()
     {

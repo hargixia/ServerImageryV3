@@ -126,17 +126,29 @@ class api_kuisoner extends Controller
             $total = array_sum(array_column($jawaban,2));
             $n = count($jawaban);
             $total_maks = $n * $cApps->jumlah_pertanyaan;
-            $nilai = ($total / $total_maks) * 100;
+            $nilai = number_format((($total / $total_maks) * 100),2);
             $rekomen = [];
-            if($nilai <= 99){
-                $nilai_min = min(array_column($jawaban,2));
-                $nilai_index = array_search($nilai_min,array_column($jawaban,2));
-                $rekomen = $jawaban[$nilai_index][4];
+            $mid = floatval($cApps->jumlah_pertanyaan / 2) + 1;
+            foreach($jawaban as $j){
+                if($j[1] <= $mid){
+                    array_push($rekomen,[
+                        $j[4]
+                    ]);
+                }
             }
-            echo json_encode($jawaban);
-            echo "<br>Total total : ".$data[3] ;
-            echo "<br>Total Nilai : ".$nilai."\n";
-            echo "<br>Rekomendasi : ".$rekomen."\n";
+
+            $res = [];
+            array_push($res,[
+                'total_nilai'   => $total,
+                'nilai'         => $nilai,
+                'rekomendasi'   => $rekomen
+            ]);
+
+            $this->vg[0] = 0;
+            $this->vg[1] = "Hasil Kuisoner";
+            $this->vg[2] = $res;
+
+            return $this->retuner($this->vg[0],$this->vg[1],$this->vg[2]);
         }
     }
 

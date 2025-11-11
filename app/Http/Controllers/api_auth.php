@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\enc;
 use App\Models\User;
 use Exception;
 
@@ -31,6 +32,7 @@ class api_auth extends Controller
 
     public function login($data)
     {
+
         $arr = $this->deco($data);
 
         if($arr[0] == "Login"){

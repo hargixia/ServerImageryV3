@@ -33,13 +33,6 @@ class WebMateri extends Component
 
     public $user_edit = false;
 
-    public function logout()
-    {
-        Auth::logout();
-        session()->flush();
-        return redirect()->to('/login');
-    }
-
     public function filterMateri($value){
         $this->FilterMateriVal = $value;
         $this->FilterMateriText = $this->textList[$this->FilterMateriVal];

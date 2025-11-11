@@ -21,10 +21,6 @@ return new class extends Migration
             $table->foreignId('id_bidangs')->constrained('bidangs','id');
             $table->foreignId('id_authors')->constrained('users','id');
         });
-
-        Schema::table('data_kategoris',function(Blueprint $table){
-            $table->foreignId('id_materi')->constrained('data_materis','id');
-        });
     }
 
     /**
