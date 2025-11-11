@@ -9,6 +9,10 @@
         <!-- Load CKEditor -->
         <script src="{{ config('app.url') }}/ckeditor/ckeditor.js"></script>
 
+        <!-- Color Theme -->
+         <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+
+         <!-- Page Title -->
         <title>{{ $title ?? 'Page Title' }}</title>
     </head>
     <body>

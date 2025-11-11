@@ -1,0 +1,94 @@
+/* ---------- STYLING UNTUK HALAMAN WEB-MATERI ---------- */
+
+.materi-container {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.materi-header h1 {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.materi-filter-bar {
+    background-color: var(--color-primary);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+}
+
+.materi-filter-bar .nav-link {
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.materi-filter-bar .nav-link:hover,
+.materi-filter-bar .btn:hover {
+    color: var(--color-accent) !important;
+}
+
+.materi-filter-bar .btn-success {
+    background-color: var(--color-secondary);
+    border: none;
+    transition: 0.2s;
+}
+
+.materi-filter-bar .btn-success:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.card {
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.badge.bg-success {
+    background-color: var(--color-secondary) !important;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    background-color: #aaa;
+    border: none;
+}
+
+.modal-content {
+    border-radius: 12px;
+}
+
+.modal-header {
+    background-color: var(--color-primary);
+    color: #fff;
+    border-bottom: none;
+}
+
+.modal-footer .btn-primary {
+    background-color: var(--color-secondary);
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: var(--color-primary);
+}
+
+p {
+    color: var(--color-text-light);
+}

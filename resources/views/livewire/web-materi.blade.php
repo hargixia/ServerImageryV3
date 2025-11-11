@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid materi-container">
 
     <div class="row mt-2">
         <div class="col-2">
@@ -8,9 +8,12 @@
         </div>
 
         <main class="col-10">
-            <h1 class="mt-3">Daftar Materi</h1>
+            <div class="materi-header">
+                <h1 class="mt-3">Daftar Materi</h1>
+            </div>
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Filter Bar -->
+            <nav class="navbar navbar-expand-lg materi-filter-bar">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -51,11 +54,10 @@
                                                 </div>
 
                                                 <label class="form-label mb-3">
-                                                        Untuk Aplikasi
+                                                    Untuk Aplikasi
                                                 </label>
 
                                                 <div class="row ms-2 mb-3">
-
                                                     @foreach ($app as $a)
                                                         <div class="form-check col-sm-6">
                                                             <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='id_app' value="{{ $a->id }}">
@@ -63,17 +65,14 @@
                                                                 {{ $a->nama }}
                                                             </label>
                                                         </div>
-
                                                     @endforeach
-
                                                 </div>
 
                                                 <label class="form-label mb-3">
-                                                        Cabang Olahraga
+                                                    Cabang Olahraga
                                                 </label>
 
                                                 <div class="row ms-2 mb-3">
-
                                                     @foreach ($data_bidang as $d)
                                                         <div class="form-check col-sm-6">
                                                             <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='id_bidang' value="{{ $d->id }}">
@@ -81,12 +80,10 @@
                                                                 {{ $d->nama }}
                                                             </label>
                                                         </div>
-
                                                     @endforeach
-
                                                 </div>
-
                                             </div>
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -100,16 +97,9 @@
                 </div>
             </nav>
 
-            <nav class="navbar navbar-light bg-light">
-                <div class="container-fluid">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-
-                    </ul>
-                </div>
-            </nav>
-
-            <p class='mt-2'>Filter : <b class="badge bg-success">{{$FilterMateriText}}</b></p>
+            <p class='mt-3'>
+                Filter : <b class="badge bg-success">{{$FilterMateriText}}</b>
+            </p>
 
             @php
                 $i = 1;
@@ -119,7 +109,7 @@
             @if ($c > 0)
                 <ul class="list-group">
                     @foreach ($data_materi as $dm)
-                        <li class="card mb-2">
+                        <li class="card mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $dm->judul }}</h5>
                                 <p class="card-text">{{ $dm->deskripsi }}</p>
@@ -132,6 +122,5 @@
                 <p class="mt-4">Tidak ada materi untuk ditampilkan.</p>
             @endif
         </main>
-
     </div>
 </div>
