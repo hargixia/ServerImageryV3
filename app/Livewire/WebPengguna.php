@@ -5,15 +5,20 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Models\bidang;
 use Livewire\Component;
+use Livewire\Attributes\Title;
+
 use Illuminate\Support\Facades\Hash;
 
 class WebPengguna extends Component
 {
+
+    #[Title('Daftar Pengguna')]
+
     public $data_bidang;
     public $pengguna;
 
     // input tambah
-    public $username, $nama, $tanggal_lahir, $jenis_kelamin, $id_role, $id_bidang, $password;
+    public $username, $nama, $tanggal_lahir, $jenis_kelamin, $id_role, $id_bidang, $password, $biang_teks;
 
     // input edit
     public $user_id, $username_edit, $nama_edit, $tanggal_lahir_edit, $jenis_kelamin_edit, $id_role_edit, $id_bidang_edit;
@@ -27,7 +32,7 @@ class WebPengguna extends Component
 
     public function render()
     {
-        $this->pengguna = User::orderBy('id', 'desc')->get();
+        $this->pengguna = User::join('bidangs','bidangs.id','=','id_bidang')->get();
         return view('livewire.web-pengguna');
     }
 
@@ -44,17 +49,22 @@ class WebPengguna extends Component
             'password' => 'required|min:6',
         ]);
 
-        User::create([
+        $parcel = User::create([
             'username' => $this->username,
             'nama' => $this->nama,
             'tanggal_lahir' => $this->tanggal_lahir,
             'jenis_kelamin' => $this->jenis_kelamin,
-            'password' => Hash::make($this->password),
+            'password' => base64_encode(base64_encode($this->password)),
             'id_role' => $this->id_role,
             'id_bidang' => $this->id_bidang,
         ]);
 
-        session()->flash('message', 'Pengguna berhasil ditambahkan.');
+        if($parcel){
+            session()->flash('message', 'Pengguna berhasil ditambahkan.');
+        }else{
+            session()->flash('message', 'error');
+        }
+
         $this->resetInput();
     }
 
