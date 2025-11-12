@@ -46,6 +46,11 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
+
+                        <button type="button" class="btn btn-danger px-4 me-3" wire:click='kembali'>
+                            Batalkan
+                        </button>
+
                         <button type="submit" class="btn btn-primary px-4">
                             Simpan
                         </button>
