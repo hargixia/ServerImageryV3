@@ -112,7 +112,14 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Bidang</label>
-                                <input type="number" class="form-control" wire:model="id_bidang">
+                                @foreach ($data_bidang as $d)
+                                    <div class="form-check col-sm-6">
+                                        <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='id_bidang' value="{{ $d->id }}">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            {{ $d->nama }}
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Password</label>

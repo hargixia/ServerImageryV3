@@ -3,11 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Models\bidang;
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 
 class WebPengguna extends Component
 {
+    public $data_bidang;
     public $pengguna;
 
     // input tambah
@@ -18,6 +20,10 @@ class WebPengguna extends Component
 
     // hapus
     public $delete_id;
+
+    public function mount(){
+        $this->data_bidang = bidang::all();
+    }
 
     public function render()
     {
