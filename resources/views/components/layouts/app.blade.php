@@ -181,6 +181,7 @@
     </style>
     </head>
     <body class="m-0 p-0">
+    @if (Auth::check() && Auth::user()->nama)
     <!-- HEADER -->
     <header class="d-flex justify-content-between align-items-center p-3 text-white shadow-sm sticky-top">
         <div class="d-flex align-items-center">
@@ -192,21 +193,21 @@
 
         <div class="d-flex align-items-center">
 
+            
             <!-- Tombol menu untuk layar kecil -->
-            <div class="dropdown d-md-none">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-list"></i>
-                </button>
+                <div class="dropdown d-md-none">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-list"></i>
+                    </button>
 
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
-                    <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-                    <li><a class="dropdown-item" href="/materi">Daftar Materi</a></li>
-                    @if (Auth::check() && Auth::user()->id_role == 1)
-                        <li><a class="dropdown-item" href="/pengguna">Daftar Pengguna</a></li>
-                    @endif
-                </ul>
-            </div>
-            @if (Auth::check() && Auth::user()->nama)
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
+                        <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="/materi">Daftar Materi</a></li>
+                        @if (Auth::check() && Auth::user()->id_role == 1)
+                            <li><a class="dropdown-item" href="/pengguna">Daftar Pengguna</a></li>
+                        @endif
+                    </ul>
+                </div>
                 <span class="me-3 fw-bold text-capitalize d-none d-md-inline" style="font-size:1.1rem;">
                     Hallo {{ Auth::user()->nama }}!
                 </span>
@@ -222,10 +223,10 @@
                         <a href="/logout" class="dropdown-item-custom text-danger">Logout</a>
                     </div>
                 </div>
-            @endif
+           
         </div>
     </header>
-
+ @endif
 
     <!-- KONTEN HALAMAN -->
     <main class="w-100">

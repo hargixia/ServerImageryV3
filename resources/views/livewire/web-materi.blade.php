@@ -1,9 +1,11 @@
 <div class="container-fluid p-0">
     <div class="row g-0">
         <!-- SIDEBAR -->
-        <aside class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
-            @include('components.navbar')
-        </aside>
+        <div class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
+            <aside class="sticky-top">
+                @include('components.navbar')
+            </aside>
+        </div>
 
         <!-- MAIN CONTENT -->
         <main class="col-12 col-lg-10 p-4" style="background-color: var(--color-bg); min-height: 100vh;">
