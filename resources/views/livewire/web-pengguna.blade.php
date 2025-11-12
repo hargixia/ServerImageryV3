@@ -52,7 +52,7 @@
                                             <span class="badge bg-secondary">User</span>
                                         @endif
                                     </td>
-                                    <td>{{ $user->id_bidang }}</td>
+                                    <td>{{ $user->bidang }}</td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-warning" wire:click="editUser({{ $user->id }})" data-bs-toggle="modal" data-bs-target="#editUserModal">
                                             <i class="bi bi-pencil"></i>
@@ -116,7 +116,7 @@
                                     <div class="form-check col-sm-6">
                                         <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='id_bidang' value="{{ $d->id }}">
                                         <label class="form-check-label" for="flexRadioDefault1">
-                                            {{ $d->nama }}
+                                            {{ $d->bidang }}
                                         </label>
                                     </div>
                                 @endforeach
@@ -124,6 +124,7 @@
                             <div class="col-md-6">
                                 <label class="form-label">Password</label>
                                 <input type="password" class="form-control" wire:model="password">
+                                <div>@error('password') {{ $message }} @enderror</div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -173,7 +174,14 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Bidang</label>
-                                <input type="number" class="form-control" wire:model="id_bidang_edit">
+                                @foreach ($data_bidang as $d)
+                                    <div class="form-check col-sm-6">
+                                        <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='id_bidang_edit' value="{{ $d->id }}">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            {{ $d->bidang }}
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="modal-footer">
