@@ -127,6 +127,33 @@
         .modal-content {
             border: none;
         }
+        
+        :root {
+            --color-bg: #f8fafc;
+            --color-card: #ffffff;
+            --color-light: #f1f3f5;
+        }
+
+        .card-m:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .input-group:focus-within {
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                display: flex;
+                justify-content: center;
+            }
+
+            main h2 {
+                font-size: 1.3rem;
+            }
+        }
+
 
         /* Responsif untuk tampilan kecil */
         @media (max-width: 768px) {
