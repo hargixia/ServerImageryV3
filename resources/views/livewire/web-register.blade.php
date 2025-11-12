@@ -73,7 +73,10 @@
                             <label class="form-label fw-semibold">Password</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
-                                <input type="password" class="form-control" wire:model='password' placeholder="Masukkan password">
+                                <input type="password" id="password" class="form-control" wire:model='password' placeholder="Masukkan password">
+                                <span class="input-group-text bg-light border-start-0 rounded-end-3" style="cursor: pointer;" onclick="togglePassword()">
+                                    <i id="toggleIcon" class="bi bi-eye"></i>
+                                </span>
                             </div>
                         </div>
 
@@ -82,7 +85,7 @@
                             <label class="form-label fw-semibold">Konfirmasi Password</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
-                                <input type="password" class="form-control" wire:model='cpassword' placeholder="Ulangi password">
+                                <input type="password" id="confirm-password" class="form-control" wire:model='cpassword' placeholder="Ulangi password">
                             </div>
                         </div>
 
@@ -120,3 +123,20 @@
         </div>
     </div>
 </div>
+<!-- Script show/hide password -->
+<script>
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    const toggleIcon = document.getElementById('toggleIcon');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        confirmPasswordInput.type = 'text';
+        toggleIcon.classList.replace('bi-eye', 'bi-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        confirmPasswordInput.type = 'password';
+        toggleIcon.classList.replace('bi-eye-slash', 'bi-eye');
+    }
+}
+</script>
