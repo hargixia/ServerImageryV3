@@ -67,7 +67,7 @@
             @if ($c > 0)
                 <ul class="list-group">
                     @foreach ($m_detail as $md)
-                        <li class="card mb-2">
+                        <li class="card mb-2" wire:click='materiTampil({{ $md->id }})' style="cursor: pointer;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $md->judul }}</h5>
                                 <p class="card-text">{{ $md->deskripsi }}</p>

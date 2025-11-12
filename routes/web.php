@@ -10,6 +10,7 @@ use App\Livewire\WebLogin;
 use App\Livewire\WebMateri;
 use App\Livewire\WebMateriDetail;
 use App\Livewire\WebMateriDetailTambah;
+use App\Livewire\WebMateriDetailTampil;
 use App\Livewire\WebPengguna;
 use App\Livewire\WebRegister;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ route::middleware('auth')->group(function(){
     route::get('/materi/detail/{id}',WebMateriDetail::class);
     route::get('/materi/detail/{id}/tambah',WebMateriDetailTambah::class);
     route::get('/materi/detail/{id}/kuisoner',WebKuisonerTambah::class);
+
+    route::get('/materi/detail/{id}/tampil/{idmd}',WebMateriDetailTampil::class);
 
     route::get('/pengguna',WebPengguna::class);
 

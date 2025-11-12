@@ -48,6 +48,12 @@ class WebMateriDetail extends Component
         $this->m_detail = data_materi_detail::where('id_materi',$this->id)->get();
     }
 
+    public function materiTampil($idmd){
+        if($idmd != ""){
+            return redirect('/materi/detail/'.$this->id.'/tampil/'.$idmd);
+        }
+    }
+
     public function tambahMateri($idm,$tipe){
         if($idm != "" || $tipe != ""){
             session(['tipe_dipilih'=>$this->tipe_list[$tipe]]);
