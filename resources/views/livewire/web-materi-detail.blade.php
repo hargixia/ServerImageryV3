@@ -1,12 +1,12 @@
-<div class="container-fluid">
-    <div class="row mt-2">
-        <div class="col-2 d-none d-md-block">
+<div class="container-fluid p-0">
+    <div class="row g-0">
+        <div class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
             <aside class="sticky-top">
                 @include('components.navbar')
             </aside>
         </div>
 
-        <main class="col-10">
+        <main class="col-12 col-lg-10 p-4">
             <!-- Informasi Judul, Bidang, Aplikasi -->
             <div class="mb-3">
                 <div class="d-flex flex-wrap align-items-start mb-2">
@@ -79,5 +79,28 @@
                 <p class="mt-4">Tidak ada materi untuk ditampilkan.</p>
             @endif
         </main>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pilih Tipe Materi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            @for ($i = 0; $i < count($tipe_list);$i++)
+                                <div class="col">
+                                    <button type="button" class="btn btn-primary" wire:click='tambahMateri({{$id}},{{$i}})'>{{$tipe_list[$i]}}</button>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
