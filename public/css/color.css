@@ -1,3 +1,26 @@
+:root {
+    --color-primary: #0077b6;
+    --color-accent: #ffcc00;
+    --color-light: #f8f9fa;
+    --color-bg: #f5f7fa;
+    --color-card: #ffffff;
+}
+
+body {
+    background-color: var(--color-bg);
+    font-family: 'Poppins', sans-serif;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-link:hover {
+    color: var(--color-accent) !important;
+}
+
+
 /* ---------- STYLING UNTUK HALAMAN WEB-MATERI ---------- */
 
 .materi-container {
@@ -92,3 +115,14 @@
 p {
     color: var(--color-text-light);
 }
+
+#searchMateri:focus {
+    box-shadow: 0 0 5px rgba(58, 176, 255, 0.4);
+}
+.input-group-text {
+    transition: background-color 0.3s ease;
+}
+.input-group-text:hover {
+    background-color: rgba(58, 176, 255, 0.8);
+}
+
