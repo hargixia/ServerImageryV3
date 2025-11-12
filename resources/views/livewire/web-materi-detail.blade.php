@@ -18,7 +18,7 @@
                 <div class="d-flex flex-wrap align-items-start mb-2">
                     <div class="fw-bold me-2" style="min-width:100px;">Bidang</div>
                     <div class="me-2">:</div>
-                    <div class="flex-grow-1">{{$m_bidang->nama}}</div>
+                    <div class="flex-grow-1">{{$m_bidang->bidang}}</div>
                 </div>
 
                 <div class="d-flex flex-wrap align-items-start mb-2">
@@ -84,7 +84,7 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- ukuran besar dan tengah -->
                 <div class="modal-content border-0 shadow-lg rounded-4">
-                    
+
                     <div class="modal-header bg-primary text-white rounded-top-4">
                         <h5 class="modal-title fw-semibold" id="exampleModalLabel">
                             <i class="bi bi-book me-2"></i>Pilih Tipe Materi
@@ -96,9 +96,9 @@
                         <div class="row g-3 justify-content-center">
                             @for ($i = 0; $i < count($tipe_list); $i++)
                                 <div class="col-6 col-md-4 col-lg-3">
-                                    <button 
-                                        type="button" 
-                                        class="btn btn-outline-primary w-100 py-3 fw-semibold materi-btn" 
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-primary w-100 py-3 fw-semibold materi-btn"
                                         wire:click="tambahMateri({{ $id }}, {{ $i }})"
                                     >
                                         <!-- Pilihan ikon otomatis (contoh umum) -->

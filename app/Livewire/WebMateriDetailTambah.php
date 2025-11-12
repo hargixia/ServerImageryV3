@@ -24,6 +24,10 @@ class WebMateriDetailTambah extends Component
 
     public $tipe_default = 3;
 
+    public function kembali(){
+        return redirect("/materi/detail/".$this->id);
+    }
+
     public function tambahMateri(){
         $isian = "";
         if($this->tipe_pilih != $this->tipe_list[$this->tipe_default]){

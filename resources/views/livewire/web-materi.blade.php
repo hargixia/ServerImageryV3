@@ -133,7 +133,7 @@
                                 @foreach ($data_bidang as $d)
                                     <div class="form-check col-sm-6">
                                         <input class="form-check-input" type="radio" wire:model='id_bidang' value="{{ $d->id }}">
-                                        <label class="form-check-label">{{ $d->nama }}</label>
+                                        <label class="form-check-label">{{ $d->bidang }}</label>
                                     </div>
                                 @endforeach
                             </div>
