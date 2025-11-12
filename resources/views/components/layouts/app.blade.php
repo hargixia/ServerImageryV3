@@ -83,7 +83,7 @@
         .dropdown-item-custom:hover {
             background: rgba(58, 176, 255, 0.15);
         }
-        /* Card hover effect */        
+        /* Card hover effect */
         .card-m {
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
@@ -113,7 +113,7 @@
             border-left: 4px solid var(--color-primary, #0d6efd); /* garis indikator aktif di kiri */
             padding-left: 20px;
         }
-        
+
         .materi-btn {
             transition: all 0.25s ease;
             border-radius: 12px;
@@ -184,14 +184,14 @@
     <!-- HEADER -->
     <header class="d-flex justify-content-between align-items-center p-3 text-white shadow-sm sticky-top">
         <div class="d-flex align-items-center">
-            <img src="{{ asset('images/logo.png') }}" 
-                alt="Logo" 
-                class="me-2" 
+            <img src="{{ asset('images/logo.png') }}"
+                alt="Logo"
+                class="me-2"
                 style="height:45px; width:auto;">
         </div>
-        
+
         <div class="d-flex align-items-center">
-            
+
             <!-- Tombol menu untuk layar kecil -->
             <div class="dropdown d-md-none">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -201,7 +201,7 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
                     <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                     <li><a class="dropdown-item" href="/materi">Daftar Materi</a></li>
-                    @if (Auth::user()->id_role == 1)
+                    @if (Auth::check() && Auth::user()->id_role == 1)
                         <li><a class="dropdown-item" href="/pengguna">Daftar Pengguna</a></li>
                     @endif
                 </ul>

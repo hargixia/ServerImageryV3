@@ -48,7 +48,7 @@ class app_seed extends Seeder
 
         foreach ($bidang as $b) {
             bidang::create([
-                'nama' => $b
+                'bidang' => $b
             ]);
         }
 

@@ -1,6 +1,7 @@
-<div class="container-fluid p-0">
-    <div class="row g-0">
-        <div class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
+<div>
+
+    <div class="row mt-2">
+        <div class="col-2">
             <aside class="sticky-top">
                 @include('components.navbar')
             </aside>
@@ -19,6 +20,28 @@
                         </label>
                     <div class="mb-4" wire:ignore>
                         <label class="form-label fw-semibold">Isi</label>
+        <main class="col-10">
+            <h1 class="mt-3">Tambah Materi</h1>
+
+            <form wire:submit='tambahMateri'>
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label  class="form-label">Judul</label>
+                        <input type="text" class="form-control" wire:model='detail_judul'>
+                    </div>
+
+                    <div class="mb-3">
+                        <label  class="form-label">Deskripsi</label>
+                        <textarea type="text" class="form-control" wire:model='detail_deskripsi'></textarea>
+                    </div>
+
+                    <label class="form-label mb-3">
+                        Tipe Materi : {{ $tipe_pilih }}
+                    </label>
+
+                    <div class="mb-3" wire:ignore>
+                        <label  class="form-label">Isi</label>
                         @if ($tipe_pilih == 'teks')
                             <textarea name="editor1" id="editor1" rows="10" class="form-control" wire:model='detail_isi'></textarea>
                             <script>
@@ -27,6 +50,12 @@
                                     editor.on('change', function() {
                                         @this.set('detail_isi', editor.getData());
                                     });
+
+                                    var editor = CKEDITOR.replace( 'editor1' );
+                                    editor.on( 'change', function( evt ) {
+                                        @this.set('detail_isi',editor.getData());
+                                    });
+
                                 });
                             </script>
                         @else
@@ -36,3 +65,14 @@
                         <button type="submit" class="btn btn-primary px-4">
                             Simpan
                         </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" wire:click='kembali' data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+</div>
