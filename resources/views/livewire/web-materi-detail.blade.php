@@ -76,7 +76,7 @@
                     @endforeach
                 </ul>
             @else
-                <p class="mt-4">Tidak ada materi untuk ditampilkan.</p>
+                <p class="mt-4">Tidak ada materi untuk ditampilkan ya.</p>
             @endif
         </main>
 
