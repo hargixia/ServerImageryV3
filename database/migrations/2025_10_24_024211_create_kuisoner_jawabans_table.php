@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->integer('pos');
             $table->float('jawaban');
+            $table->string('rekomendasi')->nullable();
             $table->timestamps();
 
             $table->foreignId('id_pertanyaan')->constrained('kuisoner_pertanyaans','id');
             $table->foreignId('id_user')->constrained('users','id');
-            $table->foreignId('id_rekomendasi')->constrained('data_rekomendasis','id');
+            $table->foreignId('id_materi')->constrained('data_materis','id');
         });
     }
 

@@ -38,6 +38,10 @@ class WebKuisonerTambah extends Component
 
     public $opsi_jawaban_dipakai;
 
+    public function kembali(){
+        return redirect("/materi/detail/".$this->id);
+    }
+
     public function hapusPertanyaan($idp){
         kuisoner_pertanyaan::where('id',$idp)->delete();
         data_rekomendasi::where('id_materi',$idp)->delete();

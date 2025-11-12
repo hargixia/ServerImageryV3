@@ -3,10 +3,15 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\Title;
+
 use App\Models\data_materi_detail;
 
 class WebMateriDetailTampil extends Component
 {
+
+    #[Title('Tampil Materi Detail')]
+
     public $id, $idmd;
     public $materiNow;
 

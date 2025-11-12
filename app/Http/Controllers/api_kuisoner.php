@@ -11,6 +11,9 @@ use App\Models\data_materi_detail;
 use App\Models\data_rekomendasi;
 use App\Models\kuisoner_jawaban;
 
+use App\Http\Controllers\Controller;
+use App\Models\data_kategori;
+
 class api_kuisoner extends Controller
 {
 
@@ -97,7 +100,7 @@ class api_kuisoner extends Controller
     }
 
     public function kuisoner_jawab($data){
-        $data = $this->deco($data);
+        $data = Controller::deco($data);
         $c_data = count($data);
         if($data[0] == "kj"){
 
@@ -110,7 +113,7 @@ class api_kuisoner extends Controller
             $cApps = data_app::where('id',$cMateri->id_apps)->get()->first();
 
             for($i=4;$i<$c_data;$i++){
-                $temp = $this->splitterv2($data[$i]);
+                $temp = Controller::splitterv2($data[$i]);
                 $temp_reko = data_rekomendasi::where('id_pertanyaan',$temp[0])->get()->first();
                 $temp_tipe = kuisoner_pertanyaan::where('id',$temp[0])->get()->first();
                 $cnilai = (int)$temp[1];
@@ -127,28 +130,64 @@ class api_kuisoner extends Controller
             $n = count($jawaban);
             $total_maks = $n * $cApps->jumlah_pertanyaan;
             $nilai = number_format((($total / $total_maks) * 100),2);
-            $rekomen = [];
+            $rekomen = "";
             $mid = floatval($cApps->jumlah_pertanyaan / 2) + 1;
             foreach($jawaban as $j){
                 if($j[1] <= $mid){
-                    array_push($rekomen,[
-                        $j[4]
-                    ]);
+                    $rekomen = $rekomen . $j[4] . ", ";
                 }
             }
 
-            $res = [];
+            $kat = "";
+            $kategori = data_kategori::all();
+            foreach($kategori as $k){
+                if($nilai >= $k->minimal && $nilai <= $k->maksimal){
+                    $kat = $k->kategori;
+                    break;
+                }
+            }
+
+            $res = array();
             array_push($res,[
                 'total_nilai'   => $total,
                 'nilai'         => $nilai,
-                'rekomendasi'   => $rekomen
+                'rekomendasi'   => $rekomen,
+                'kategori'      => $kat
             ]);
+            $posx = 0;
+            $pos = kuisoner_jawaban::where('id_user',$idu)->where('id_materi',$idm)->orderBy('created_at','desc')->get()->first();
+            if($pos == null){
+                $posx = 0;
+            }else{
+                $posx = $pos->pos + 1;
+            }
+
+            foreach($jawaban as $j){
+                $kj = new kuisoner_jawaban();
+                $kj->id_materi = $idm;
+                $kj->id_user = $idu;
+                $kj->id_pertanyaan = $j[0];
+                $kj->jawaban = $j[1];
+                $kj->pos = $posx;
+                $kj->rekomendasi = $j[4];
+                $kj->save();
+            }
+
+            $kuisoner = new data_kuisoner();
+            $kuisoner->id_materi = $idm;
+            $kuisoner->id_user = $idu;
+            $kuisoner->nilai = $nilai;
+            $kuisoner->rekomendasi = $rekomen;
+            $kuisoner->kategori = $kat;
+            $kuisoner->tipe = $data[3];
+            $kuisoner->save();
 
             $this->vg[0] = 0;
             $this->vg[1] = "Hasil Kuisoner";
             $this->vg[2] = $res;
-
             return $this->retuner($this->vg[0],$this->vg[1],$this->vg[2]);
+
+            echo json_encode($jawaban);
         }
     }
 

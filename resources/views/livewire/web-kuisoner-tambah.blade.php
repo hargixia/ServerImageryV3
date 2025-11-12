@@ -162,8 +162,8 @@
                                 <label for="exampleFormControlTextarea1" class="form-label">Rekomendasi</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" wire:model='rekomendasi'></textarea>
                             </div>
-
                             <button type="submit" class="btn btn-primary mt-4" style="width: 100%">Tambah Pertanyaan</button>
+                            <button type="button" class="btn btn-danger mt-4" style="width: 100%" wire:click='kembali'>Kambali</button>
                         </div>
                     </form>
                 </div>
