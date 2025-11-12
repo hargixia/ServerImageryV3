@@ -80,19 +80,41 @@
             @endif
         </main>
 
-        <!-- Modal -->
+        <!-- Modal Pilih Tipe Materi -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Pilih Tipe Materi</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- ukuran besar dan tengah -->
+                <div class="modal-content border-0 shadow-lg rounded-4">
+                    
+                    <div class="modal-header bg-primary text-white rounded-top-4">
+                        <h5 class="modal-title fw-semibold" id="exampleModalLabel">
+                            <i class="bi bi-book me-2"></i>Pilih Tipe Materi
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            @for ($i = 0; $i < count($tipe_list);$i++)
-                                <div class="col">
-                                    <button type="button" class="btn btn-primary" wire:click='tambahMateri({{$id}},{{$i}})'>{{$tipe_list[$i]}}</button>
+
+                    <div class="modal-body py-4">
+                        <div class="row g-3 justify-content-center">
+                            @for ($i = 0; $i < count($tipe_list); $i++)
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <button 
+                                        type="button" 
+                                        class="btn btn-outline-primary w-100 py-3 fw-semibold materi-btn" 
+                                        wire:click="tambahMateri({{ $id }}, {{ $i }})"
+                                    >
+                                        <!-- Pilihan ikon otomatis (contoh umum) -->
+                                        @if (str_contains(strtolower($tipe_list[$i]), 'video'))
+                                            <i class="bi bi-play-circle fs-3 mb-2 d-block"></i>
+                                        @elseif (str_contains(strtolower($tipe_list[$i]), 'teks'))
+                                            <i class="bi bi-file-text fs-3 mb-2 d-block"></i>
+                                        @elseif (str_contains(strtolower($tipe_list[$i]), 'gambar'))
+                                            <i class="bi bi-image fs-3 mb-2 d-block"></i>
+                                        @elseif (str_contains(strtolower($tipe_list[$i]), 'kuis'))
+                                            <i class="bi bi-question-circle fs-3 mb-2 d-block"></i>
+                                        @else
+                                            <i class="bi bi-folder fs-3 mb-2 d-block"></i>
+                                        @endif
+                                        {{ $tipe_list[$i] }}
+                                    </button>
                                 </div>
                             @endfor
                         </div>
@@ -100,6 +122,7 @@
                 </div>
             </div>
         </div>
+
 
 
     </div>

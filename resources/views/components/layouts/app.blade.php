@@ -113,6 +113,21 @@
             border-left: 4px solid var(--color-primary, #0d6efd); /* garis indikator aktif di kiri */
             padding-left: 20px;
         }
+        
+        .materi-btn {
+            transition: all 0.25s ease;
+            border-radius: 12px;
+        }
+        .materi-btn:hover {
+            transform: translateY(-4px);
+            background-color: var(--bs-primary);
+            color: white;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .modal-content {
+            border: none;
+        }
+        
         /* Responsif untuk tampilan kecil */
         @media (max-width: 768px) {
             .card {
@@ -140,7 +155,7 @@
     </head>
     <body class="m-0 p-0">
     <!-- HEADER -->
-    <header class="d-flex justify-content-between align-items-center p-3 text-white shadow-sm header-sticky">
+    <header class="d-flex justify-content-between align-items-center p-3 text-white shadow-sm sticky-top">
         <div class="d-flex align-items-center">
             <img src="{{ asset('images/logo.png') }}" 
                 alt="Logo" 
