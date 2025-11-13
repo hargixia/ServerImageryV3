@@ -49,7 +49,7 @@
                     </button>
                 </div>
                 <div class="col-12 col-sm-3 mb-2 mb-sm-0">
-                    <button type="button" class="btn btn-success w-100 fw-semibold">
+                    <button type="button" class="btn btn-success w-100 fw-semibold" wire:click='kePerkembangan'>
                         <i class="bi bi-bar-chart-line me-2"></i> Lihat Perkembangan
                     </button>
                 </div>

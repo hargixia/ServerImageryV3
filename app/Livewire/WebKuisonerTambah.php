@@ -66,8 +66,8 @@ class WebKuisonerTambah extends Component
 
     public function mount(){
         $this->idm = session('idm',1);
-        $materi = data_materi::where('id',$this->id)->get()->first();
-        $this->md = data_materi::where('id',$this->idm)->get()->first();
+        $materi = data_materi::where('id',$this->id)->get()->first();    ## perbaiki lagi ini
+        $this->md = data_materi::where('id',$this->idm)->get()->first(); ## ini juga
         $apps = data_app::where('id',$materi->id_apps)->get()->first();
         $this->jawaban = $apps->jumlah_pertanyaan;
         $this->pertanyaan = kuisoner_pertanyaan::where('id_materi',$this->id)->orderBy('no','asc')->get();
