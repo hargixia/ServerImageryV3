@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->longText('isi');
             $table->boolean('status');
+            $table->float('nilai');
             $table->timestamps();
 
             $table->foreignId('id_materi')->constrained('data_materis','id');
