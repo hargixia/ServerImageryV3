@@ -1,3 +1,3 @@
-<div>
-    {{-- The best athlete wants his opponent at his best. --}}
-</div>
+    @if (Auth::check() && Auth::user()->nama)
+        @include('components.header')
+    @endif
