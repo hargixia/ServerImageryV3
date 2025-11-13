@@ -81,12 +81,20 @@
     @endforeach
 
     <script>
-        let xValues = [];
-        let yValues = [];
-        @for ($i = 0;$i < count($data_kuisoner);$i++)
-            yValues.push({{ $data_kuisoner[$i]->nilai }});
-            xValues.push({{ $i }});
-        @endfor
+        @php
+            $i = 0;
+            echo 'let yValues = [';
+            foreach ($data_kuisoner as $dk){
+                echo $dk->nilai .', ';
+            }
+            echo '];';
+
+            echo 'let xValues = [';
+            foreach ($data_kuisoner as $dk){
+                echo $i++ .', ';
+            }
+            echo '];';
+        @endphp
 
         const ctx = document.getElementById('myChart');
 
