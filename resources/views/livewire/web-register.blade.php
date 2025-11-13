@@ -102,7 +102,6 @@
                                 </a>
                             </div>
                         </div>
-
                     </form>
                     <!-- Error Message -->
                     @if(session('error'))
