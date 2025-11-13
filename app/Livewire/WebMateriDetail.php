@@ -8,6 +8,9 @@ use App\Models\bidang;
 use App\Models\data_materi_detail;
 use Livewire\Component;
 
+use App\Http\Controllers\api_kuisoner;
+use Illuminate\Support\Facades\Auth;
+
 use function PHPUnit\Framework\isEmpty;
 
 class WebMateriDetail extends Component
@@ -18,6 +21,7 @@ class WebMateriDetail extends Component
     public $m_deskripsi;
     public $m_app;
     public $m_bidang;
+    public $mode = "PreTest";
 
     public $user_edit = false;
 
@@ -32,10 +36,17 @@ class WebMateriDetail extends Component
         'file'
     ];
 
+    public $cekKuisoner ="";
+
     public function mount($id){
         $this->user_edit = session('user_edit', false);
-
         $this->id = $id;
+
+        $ak = new api_kuisoner();
+        $idu = Auth::user()->id;
+        $data = "kc>>".$id.">>".$idu;
+        $kc = json_decode($ak->kuisoner_cek(base64_encode($data)));
+
         $materi = data_materi::find($this->id);
         $app = data_app::find($materi->id_apps);
         $bidang = bidang::find($materi->id_bidangs);
@@ -45,6 +56,12 @@ class WebMateriDetail extends Component
         $this->m_app = $app;
         $this->m_bidang = $bidang;
 
+        if($idu != $materi->id_authors || $idu > 2){
+            if($kc->msg == $this->mode){
+                $this->lakukanTest();
+            }
+        }
+
         $this->m_detail = data_materi_detail::where('id_materi',$this->id)->get();
     }
 
@@ -52,6 +69,10 @@ class WebMateriDetail extends Component
         if($idmd != ""){
             return redirect('/materi/detail/'.$this->id.'/tampil/'.$idmd);
         }
+    }
+
+    public function lakukanTest(){
+        return redirect('/materi/'.$this->id.'/t/'.$this->mode);
     }
 
     public function tambahMateri($idm,$tipe){

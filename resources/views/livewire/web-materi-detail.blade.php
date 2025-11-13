@@ -41,7 +41,7 @@
             <!-- Tombol -->
             <div class="row mt-3 mb-3 justify-content-center sticky-top">
                 <div class="col-12 col-sm-3 mb-2 mb-sm-0">
-                    <button type="button" class="btn btn-danger w-100">Lakukan Test</button>
+                    <button type="button" class="btn btn-danger w-100" wire:click='lakukanTest'>Lakukan Test</button>
                 </div>
                 <div class="col-12 col-sm-3 mb-2 mb-sm-0">
                     <button type="button" class="btn btn-success w-100">Lihat Perkembangan</button>

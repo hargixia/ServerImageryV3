@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('data_kuisoners', function (Blueprint $table) {
             $table->id();
             $table->float('nilai');
+            $table->text('rekomendasi');
+            $table->string('kategori');
+            $table->string('tipe');
             $table->timestamps();
 
             $table->foreignId('id_user')->constrained('users','id');
             $table->foreignId('id_materi')->constrained('data_materis','id');
-            $table->foreignId('id_kategori')->constrained('data_kategoris','id');
-            $table->foreignId('id_rekomendasi')->constrained('data_rekomendasis','id');
         });
     }
 

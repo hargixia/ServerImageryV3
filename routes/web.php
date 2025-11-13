@@ -6,6 +6,7 @@ use App\Http\Controllers\api_kuisoner;
 
 use App\Livewire\WebDashboard;
 use App\Livewire\WebKuisonerTambah;
+use App\Livewire\WebKuisonerTes;
 use App\Livewire\WebLogin;
 use App\Livewire\WebMateri;
 use App\Livewire\WebMateriDetail;
@@ -30,6 +31,7 @@ route::middleware('auth')->group(function(){
     route::get('/materi/detail/{id}/kuisoner',WebKuisonerTambah::class);
 
     route::get('/materi/detail/{id}/tampil/{idmd}',WebMateriDetailTampil::class);
+    route::get('/materi/{id}/t/{mode}',WebKuisonerTes::class);
 
     route::get('/pengguna',WebPengguna::class);
 

@@ -31,7 +31,7 @@ class WebLogin extends Component
     {
         $this->user = User::where('username', $this->username)->first();
         if ($this->user && base64_decode(base64_decode($this->user->password)) == $this->password) {
-            if($this->user->id_role !=3){
+            if($this->user->id_role <=2){
                 session(['user_edit'=>True]);
             }else{
                 session(['user_edit'=>False]);
