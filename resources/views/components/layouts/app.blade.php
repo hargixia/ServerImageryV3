@@ -173,6 +173,10 @@
             .form-control {
                 font-size: 0.95rem;
             }
+            .form-check {
+                text-align: left;
+            }
+
 
         }
     </style>
