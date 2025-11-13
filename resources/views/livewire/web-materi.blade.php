@@ -37,7 +37,7 @@
                         wire:model.defer="searchQuery"
                         wire:keydown.enter="searchMateri"
                         style="font-size: 0.95rem;">
-                    
+
                 </div>
             </div>
 

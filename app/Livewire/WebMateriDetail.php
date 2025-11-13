@@ -21,8 +21,9 @@ class WebMateriDetail extends Component
     public $m_deskripsi;
     public $m_app;
     public $m_bidang;
-    public $mode = "PreTest";
+    public $m_tugasBool;
 
+    public $mode = "PreTest";
     public $user_edit = false;
 
     public $m_detail;
@@ -39,7 +40,7 @@ class WebMateriDetail extends Component
     public $cekKuisoner ="";
 
     public function mount($id){
-        $this->user_edit = session('user_edit', false);
+
         $this->id = $id;
 
         $ak = new api_kuisoner();
@@ -63,6 +64,18 @@ class WebMateriDetail extends Component
         }
 
         $this->m_detail = data_materi_detail::where('id_materi',$this->id)->get();
+        $sesion = session('user_edit', false);
+        $author = $materi->id_authors;
+        if(Auth::user()->id_role == 1 || Auth::user()->id == $author){
+            $this->user_edit = true;
+        }else{
+            $this->user_edit = false;
+        }
+
+    }
+
+    public function hapusMD($id){
+        data_materi_detail::where('id', $id)->delete();
     }
 
     public function materiTampil($idmd){
