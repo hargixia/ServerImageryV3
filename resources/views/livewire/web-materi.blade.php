@@ -103,21 +103,21 @@
                 <form wire:submit.prevent='tambahMateri'>
                     <div class="modal-body p-4">
 
-                        {{-- Judul --}}
+                        <!-- Judul Materi -->
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Judul Materi</label>
                             <input type="text" class="form-control" placeholder="Masukkan judul materi..." wire:model='judul'>
                             @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
-                        {{-- Deskripsi --}}
+                        <!-- Deskripsi Materi -->
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Deskripsi</label>
                             <textarea class="form-control" rows="3" placeholder="Tuliskan deskripsi materi..." wire:model='deskripsi'></textarea>
                             @error('deskripsi') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
-                        {{-- Untuk Aplikasi --}}
+                        <!-- Untuk Aplikasi -->
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Untuk Aplikasi</label>
                             <div class="row ms-1">
@@ -131,7 +131,7 @@
                             @error('id_app') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
-                        {{-- Cabang Olahraga --}}
+                        <!-- Cabang Olahraga -->
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Cabang Olahraga</label>
                             <div class="row ms-1">
