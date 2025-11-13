@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->text('deskripsi');
+            $table->boolean('tugas');
+            $table->boolean('exp');
+            $table->dateTime('start')->nullable();
+            $table->dateTime('stop')->nullable();
             $table->timestamps();
 
             $table->foreignId('id_apps')->constrained('data_apps','id');
