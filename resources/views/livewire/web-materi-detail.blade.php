@@ -72,49 +72,58 @@
             <!-- List Materi -->
             @if (count($m_detail) > 0)
                 <div class="row">
-                    @foreach ($m_detail as $md)
-                        <div class="col-12 mb-3">
-                            <div class="card shadow-sm border-0 rounded-4 h-100">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-start flex-wrap">
-                                        <h5 class="card-title text-primary fw-bold mb-2">{{ $md->judul }}</h5>
-                                        <span class="badge bg-info text-dark mb-2">
-                                            <i class="bi bi-tag me-1"></i> {{ $md->tipe ?? 'Materi Umum' }}
-                                        </span>
-                                    </div>
+                @foreach ($m_detail as $md)
+                    <div class="col-12 mb-3">
+                        <div class="card shadow-sm border-0 rounded-4 h-100">
+                            <div class="card-body">
+                                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-2">
+                                    <h5 class="card-title text-primary fw-bold mb-2 mb-md-0">
+                                        {{ $md->judul }}
+                                    </h5>
+                                    <span class="badge bg-info text-dark">
+                                        <i class="bi bi-tag me-1"></i> {{ $md->tipe ?? 'Materi Umum' }}
+                                    </span>
+                                </div>
 
-                                    <p class="card-text text-secondary mb-3">{{ $md->deskripsi }}</p>
+                                <p class="card-text text-secondary mb-3">{{ $md->deskripsi }}</p>
 
-                                    @if ($md->tugas == 1)
-                                        <span class="badge bg-warning text-dark me-2">
-                                            <i class="bi bi-clipboard-check me-1"></i> Tugas Tersedia
-                                        </span>
-                                    @else
-                                        <span class="badge bg-secondary">
-                                            <i class="bi bi-clipboard-x me-1"></i> Tidak Ada Tugas
-                                        </span>
-                                    @endif
+                                @if ($md->tugas == 1)
+                                    <span class="badge bg-warning text-dark me-2">
+                                        <i class="bi bi-clipboard-check me-1"></i> Tugas Tersedia
+                                    </span>
+                                @else
+                                    <span class="badge bg-secondary">
+                                        <i class="bi bi-clipboard-x me-1"></i> Tidak Ada Tugas
+                                    </span>
+                                @endif
 
-                                    <div class="mt-3 d-flex flex-wrap gap-2">
+                                <div class="mt-3 d-flex flex-wrap gap-2">
+                                    <button type="button" 
+                                            class="btn btn-outline-secondary btn-sm fw-semibold"
+                                            wire:click='materiTampil({{ $md->id }})'>
+                                        <i class="bi bi-clipboard2-check me-1"></i> Lihat Tugas
+                                    </button>
+
+                                    <button type="button" 
+                                            class="btn btn-outline-primary btn-sm fw-semibold"
+                                            wire:click='materiTampil({{ $md->id }})'>
+                                        <i class="bi bi-book-open me-1"></i> Baca
+                                    </button>
+
+                                    @if ($user_edit == 1)
                                         <button type="button" 
-                                                class="btn btn-outline-primary btn-sm fw-semibold"
-                                                wire:click='materiTampil({{ $md->id }})'>
-                                            <i class="bi bi-book-open me-1"></i> Baca Materi
+                                                class="btn btn-outline-danger btn-sm fw-semibold"
+                                                wire:click='hapusMD({{ $md->id }})'>
+                                            <i class="bi bi-trash3 me-1"></i> Hapus Materi
                                         </button>
-
-                                        @if ($user_edit == 1)
-                                            <button type="button" 
-                                                    class="btn btn-outline-danger btn-sm fw-semibold"
-                                                    wire:click='hapusMD({{ $md->id }})'>
-                                                <i class="bi bi-trash3 me-1"></i> Hapus
-                                            </button>
-                                        @endif
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
+            </div>
+
             @else
                 <div class="alert alert-warning mt-4 text-center shadow-sm">
                     <i class="bi bi-exclamation-circle me-2"></i> Tidak ada materi untuk ditampilkan.
