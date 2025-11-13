@@ -57,7 +57,7 @@
                     @if ($tugasStat == "Checked")
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <h5 class="card-title">Soal Tugas</h5>
 
                                 <textarea name="editor2" id="editor2" rows="10" class="form-control" wire:model='isi_tugas'></textarea>
                                 <script>

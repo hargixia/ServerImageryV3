@@ -9,7 +9,7 @@
 
     @if (Auth::user()->id_role == 1)
         <li class="nav-item">
-            <a class="nav-link {{ request()->is('pengguna*') ? 'active' : '' }}" href="/pengguna">Management Pengguna</a>
+            <a class="nav-link {{ request()->is('pengguna*') ? 'active' : '' }}" href="/pengaturan-akun">Management Pengguna</a>
         </li>
     @endif
 </ul>
