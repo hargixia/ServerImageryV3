@@ -127,7 +127,7 @@
         .modal-content {
             border: none;
         }
-        
+
         :root {
             --color-bg: #f8fafc;
             --color-card: #ffffff;

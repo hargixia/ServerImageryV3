@@ -74,6 +74,13 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $md->judul }}</h5>
                                 <p class="card-text">{{ $md->deskripsi }}</p>
+                                @if ($md->tugas == 1)
+                                    Tugas Tersedia
+                                @endif
+
+                                @if ($user_edit == 1)
+                                    <button type="button" wire:click='hapusMD({{ $md->id }})'>Hapus</button>
+                                @endif
                             </div>
                         </li>
                     @endforeach
