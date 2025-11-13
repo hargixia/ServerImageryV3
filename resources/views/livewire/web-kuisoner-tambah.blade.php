@@ -1,12 +1,14 @@
 <div class="container-fluid p-0">
-    <div class="row mt-2">
-        <div class="col-2">
-            <aside class="sticky-top">
+    <div class="row g-0">
+        <!-- SIDEBAR -->
+        <div class="col-2 bg-light border-end p-3 d-none d-md-block"
+             style="position: sticky; top: 80px; height: calc(100vh - 80px); overflow-y: auto;">
+            <aside>
                 @include('components.navbar')
             </aside>
         </div>
 
-        <main class="col-10">
+        <main class="border-start col-12 col-lg-10 p-4" style="background-color: var(--color-bg); min-height: 100vh;">
             <h1 class="mt-3">Tambah Kuisoner</h1>
             <h3 class="mt-2">Judul : {{$md->judul}}</h3>
 

@@ -177,7 +177,7 @@
         }
     </style>
     </head>
-    <body class="m-0 p-0">
+    <body class="m-0 p-0 bg-light">
     @if (Auth::check() && Auth::user()->nama)
     <!-- HEADER -->
     <header class="d-flex justify-content-between align-items-center p-3 text-white shadow-sm">
