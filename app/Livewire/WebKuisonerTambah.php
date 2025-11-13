@@ -43,8 +43,8 @@ class WebKuisonerTambah extends Component
     }
 
     public function hapusPertanyaan($idp){
+        data_rekomendasi::where('id_pertanyaan',$idp)->delete();
         kuisoner_pertanyaan::where('id',$idp)->delete();
-        data_rekomendasi::where('id_materi',$idp)->delete();
     }
 
     public function tambahPertanyaan(){

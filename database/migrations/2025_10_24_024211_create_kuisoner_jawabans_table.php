@@ -16,11 +16,10 @@ return new class extends Migration
             $table->integer('pos');
             $table->float('jawaban');
             $table->string('rekomendasi')->nullable();
+            $table->bigInteger('id_materi');
+            $table->bigInteger('id_pertanyaan');
+            $table->bigInteger('id_user');
             $table->timestamps();
-
-            $table->foreignId('id_pertanyaan')->constrained('kuisoner_pertanyaans','id');
-            $table->foreignId('id_user')->constrained('users','id');
-            $table->foreignId('id_materi')->constrained('data_materis','id');
         });
     }
 

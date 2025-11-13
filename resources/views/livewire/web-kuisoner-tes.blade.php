@@ -14,7 +14,7 @@
                         @foreach ($opsi as $i => $o)
                             <div class="col">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" wire:click='jawab({{ $k->id }}, "{{ $i+1 }}")'>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" wire:click='jawab({{ $k->no }}, "{{ $i+1 }}")'>
                                     <label class="form-check-label" for="flexRadioDefault1" >
                                         {{ $o }}
                                     </label>
@@ -34,7 +34,7 @@
     </p>
 
     @if ($kirim != null)
-        Selamat kamu telah menyelesaikan 
+        Selamat kamu telah menyelesaikan
     @endif
 
 </div>
