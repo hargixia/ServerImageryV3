@@ -44,6 +44,7 @@ class WebMateriDetailTambah extends Component
         $md->tipe = $this->tipe_pilih;
         $md->isi = $isian;
         $md->id_materi = $this->id;
+        $md->tugas = False;
         $md->save();
         return redirect("/materi/detail/".$this->id);
     }

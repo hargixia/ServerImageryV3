@@ -23,6 +23,11 @@ return new class extends Migration
                 'file'
             ]);
             $table->longText('isi');
+
+            $table->boolean('tugas');
+            $table->boolean('exp')->nullable();
+            $table->dateTime('start')->nullable();
+            $table->dateTime('stop')->nullable();
             $table->timestamps();
 
             $table->foreignId('id_materi')->constrained('data_materis','id');
