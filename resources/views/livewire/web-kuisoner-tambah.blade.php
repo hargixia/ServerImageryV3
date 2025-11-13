@@ -1,5 +1,7 @@
-<div class="container-fluid">
-
+<div class="container-fluid p-0">
+    @if (Auth::check() && Auth::user()->nama)
+        @include('components.header')
+    @endif
     <div class="row mt-2">
         <div class="col-2">
             <aside class="sticky-top">

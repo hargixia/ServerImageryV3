@@ -1,4 +1,7 @@
-<div class="container-fluid py-3">
+<div class="container-fluid py-0">
+    @if (Auth::check() && Auth::user()->nama)
+        @include('components.header')
+    @endif
     <div class="row mt-2">
         <!-- NAVBAR SAMPING -->
         <div class="col-12 col-md-3 col-lg-2 mb-3 mb-md-0">
