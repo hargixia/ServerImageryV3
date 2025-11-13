@@ -8,7 +8,7 @@
         </div>
 
         <main class="col-10">
-            <h1 class="mt-3">Selamat Datang {{ Auth::user()->nama }}</h1>
+            <h1 class="mt-3">Akun : {{ Auth::user()->nama }}</h1>
         </main>
 
     </div>

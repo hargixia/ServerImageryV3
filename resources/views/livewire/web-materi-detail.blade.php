@@ -49,7 +49,7 @@
                     </button>
                 </div>
                 <div class="col-12 col-sm-3 mb-2 mb-sm-0">
-                    <button type="button" class="btn btn-success w-100 fw-semibold">
+                    <button type="button" class="btn btn-success w-100 fw-semibold" wire:click='kePerkembangan'>
                         <i class="bi bi-bar-chart-line me-2"></i> Lihat Perkembangan
                     </button>
                 </div>
@@ -96,14 +96,14 @@
                                     @endif
 
                                     <div class="mt-3 d-flex flex-wrap gap-2">
-                                        <button type="button" 
+                                        <button type="button"
                                                 class="btn btn-outline-primary btn-sm fw-semibold"
                                                 wire:click='materiTampil({{ $md->id }})'>
                                             <i class="bi bi-book-open me-1"></i> Baca Materi
                                         </button>
 
                                         @if ($user_edit == 1)
-                                            <button type="button" 
+                                            <button type="button"
                                                     class="btn btn-outline-danger btn-sm fw-semibold"
                                                     wire:click='hapusMD({{ $md->id }})'>
                                                 <i class="bi bi-trash3 me-1"></i> Hapus

@@ -3,7 +3,7 @@
 use App\Http\Controllers\api_auth;
 use App\Http\Controllers\api_materi;
 use App\Http\Controllers\api_kuisoner;
-
+use App\Livewire\WebAkun;
 use App\Livewire\WebDashboard;
 use App\Livewire\WebKuisonerTambah;
 use App\Livewire\WebKuisonerTes;
@@ -13,6 +13,8 @@ use App\Livewire\WebMateriDetail;
 use App\Livewire\WebMateriDetailTambah;
 use App\Livewire\WebMateriDetailTampil;
 use App\Livewire\WebPengguna;
+use App\Livewire\WebPerkembangan;
+use App\Livewire\WebPerkembanganList;
 use App\Livewire\WebRegister;
 use Illuminate\Support\Facades\Route;
 
@@ -32,8 +34,11 @@ route::middleware('auth')->group(function(){
 
     route::get('/materi/detail/{id}/tampil/{idmd}',WebMateriDetailTampil::class);
     route::get('/materi/{id}/t/{mode}',WebKuisonerTes::class);
+    route::get('/materi/detail/{id}/perkembangan',WebPerkembanganList::class);
+    route::get('/materi/detail/{id}/perkembangan/d/{idu}',WebPerkembangan::class);
 
     route::get('/pengguna',WebPengguna::class);
+    route::get('pengaturan-akun',WebAkun::class);
 
     route::get('/logout', [WebLogin::class, 'logout']);
 });

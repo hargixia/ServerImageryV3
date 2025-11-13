@@ -57,10 +57,10 @@ class WebMateriDetail extends Component
         $this->m_app = $app;
         $this->m_bidang = $bidang;
 
-        if($idu != $materi->id_authors || $idu > 2){
-            if($kc->msg == $this->mode){
-                $this->lakukanTest();
-            }
+        if($kc->msg == $this->mode){
+            $this->lakukanTest();
+        }else{
+            $this->mode = "PostTest";
         }
 
         $this->m_detail = data_materi_detail::where('id_materi',$this->id)->get();
@@ -72,6 +72,14 @@ class WebMateriDetail extends Component
             $this->user_edit = false;
         }
 
+    }
+
+    public function kePerkembangan(){
+        if($this->user_edit == false){
+            return redirect('/materi/detail/'.$this->id.'/perkembangan/d/'.Auth::user()->id);
+        }else{
+            return redirect('/materi/detail/'.$this->id.'/perkembangan');
+        }
     }
 
     public function hapusMD($id){
