@@ -1,5 +1,5 @@
     <!-- HEADER -->
-    <header class="d-flex justify-content-between align-items-center p-3 text-white shadow-sm">
+         <header class="d-flex justify-content-between align-items-center p-3 text-white shadow-sm">
         <div class="d-flex align-items-center">
             <img src="{{ asset('images/logo.png') }}"
                 alt="Logo"
@@ -9,7 +9,7 @@
 
         <div class="d-flex align-items-center">
 
-            
+
             <!-- Tombol menu untuk layar kecil -->
                 <div class="dropdown d-md-none">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,6 +39,6 @@
                         <a href="/logout" class="dropdown-item-custom text-danger">Logout</a>
                     </div>
                 </div>
-           
+
         </div>
     </header>

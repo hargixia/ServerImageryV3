@@ -21,8 +21,9 @@ class WebMateriDetail extends Component
     public $m_deskripsi;
     public $m_app;
     public $m_bidang;
-    public $mode = "PreTest";
+    public $m_tugasBool;
 
+    public $mode = "PreTest";
     public $user_edit = false;
 
     public $m_detail;
@@ -63,6 +64,10 @@ class WebMateriDetail extends Component
         }
 
         $this->m_detail = data_materi_detail::where('id_materi',$this->id)->get();
+    }
+
+    public function hapusMD($id){
+        data_materi_detail::where('id', $id)->delete();
     }
 
     public function materiTampil($idmd){

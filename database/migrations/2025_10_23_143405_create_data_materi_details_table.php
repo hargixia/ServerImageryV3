@@ -25,6 +25,7 @@ return new class extends Migration
             $table->longText('isi');
 
             $table->boolean('tugas');
+            $table->longText('isi_tugas')->nullable();
             $table->boolean('exp')->nullable();
             $table->dateTime('start')->nullable();
             $table->dateTime('stop')->nullable();

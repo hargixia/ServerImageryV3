@@ -48,6 +48,47 @@
                         @endif
                     </div>
 
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" {{ $tugasStat }} value="" id="flexCheckDefault" wire:click='onTugas()'>
+                        <label class="form-check-label" for="flexCheckDefault" wire:click='onTugas()'>
+                            Kasih Tugas
+                        </label>
+                    </div>
+
+                    @if ($tugasStat == "Checked")
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+
+                                <textarea name="editor2" id="editor2" rows="10" class="form-control" wire:model='isi_tugas'></textarea>
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        const editor2 = CKEDITOR.replace('editor2');
+                                        editor2.on('change', function() {
+                                            @this.set('isi_tugas', editor2.getData());
+                                        });
+                                    });
+                                </script>
+
+                                <div class="mb-3 row mt-3">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Waktu Mulai</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control mb-2" wire:model='tugas_start_date'>
+                                        <input type="time" class="form-control" wire:model='tugas_start_time'>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row mt-3">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Waktu Tutup</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control mb-2" wire:model='tugas_stop_date'>
+                                        <input type="time" class="form-control" wire:model='tugas_stop_date'>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="d-flex justify-content-end">
 
                         <button type="button" class="btn btn-danger px-4 me-3" wire:click='kembali'>
