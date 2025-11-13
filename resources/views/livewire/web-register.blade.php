@@ -104,7 +104,6 @@
                         </div>
 
                     </form>
-
                     <!-- Error Message -->
                     @if(session('error'))
                         <div id="error_msg" class="alert alert-danger text-center mt-4">
