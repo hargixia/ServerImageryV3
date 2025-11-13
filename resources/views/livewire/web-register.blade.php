@@ -1,107 +1,140 @@
-<div class="d-flex justify-content-center">
-    <div class="card" style="width:50%;margin-top:3%">
-      <div class="card-body">
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
 
-        <div class="row">
-            <div class="col-sm-7">
+                    <h4 class="text-center mb-4 fw-semibold">
+                        Buat Akun {{ config('app.name') }}
+                    </h4>
 
-            </div>
+                    <form wire:submit='register_act'>
+                        @csrf
 
-            <div class="col-sm-5">
-                <h3 class="text-center"> Buat Akun Untuk Aplikasi {{ config('app.name') }} </h3>
-                <form class="mt-4" wire:submit='register_act'>
-                    @csrf
-                    <div class="mb-3">
-                      <label for="username" class="form-label">Username</label>
-                      <input type="text" class="form-control" wire:model='username'>
-                    </div>
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                                <input type="text" class="form-control" wire:model='username' placeholder="Masukkan username">
+                            </div>
+                        </div>
 
-                    <div class="mb-3">
-                      <label for="nama" class="form-label">Nama Lengkap</label>
-                      <input type="text" class="form-control" wire:model='nama'>
-                    </div>
+                        <!-- Nama Lengkap -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nama Lengkap</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-person-badge"></i></span>
+                                <input type="text" class="form-control" wire:model='nama' placeholder="Masukkan nama lengkap">
+                            </div>
+                        </div>
 
-                    <div class="mb-3">
-                      <label for="tgl" class="form-label">Tanggal Lahir</label>
-                      <input type="date" class="form-control" wire:model='tanggal_lahir'>
-                    </div>
+                        <!-- Tanggal Lahir -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tanggal Lahir</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-calendar-date"></i></span>
+                                <input type="date" class="form-control" wire:model='tanggal_lahir'>
+                            </div>
+                        </div>
 
-                    <label class="form-label mb-3">
-                            Cabang Olahraga
-                    </label>
+                        <!-- Cabang Olahraga -->
+                        <label class="form-label fw-semibold mb-2">Cabang Olahraga</label>
+                        <div class="row ms-1 mb-3">
+                            @foreach ($data_bidang as $d)
+                                <div class="form-check col-6 mb-2">
+                                    <input class="form-check-input" type="radio" id="bidang_{{ $d->id }}" wire:model='id_bidang' value="{{ $d->id }}">
+                                    <label class="form-check-label small" for="bidang_{{ $d->id }}">
+                                        {{ $d->bidang }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
 
-                    <div class="row ms-2 mb-3">
-
-                        @foreach ($data_bidang as $d)
-                            <div class="form-check col-sm-6">
-                                <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='id_bidang' value="{{ $d->id }}">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    {{ $d->nama }}
+                        <!-- Jenis Kelamin -->
+                        <label class="form-label fw-semibold mb-2">Jenis Kelamin</label>
+                        <div class="ms-1 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="jk_l" wire:model='jenis_kelamin' value="L">
+                                <label class="form-check-label" for="jk_l">
+                                    <i class="bi bi-gender-male text-primary"></i> Laki-Laki
                                 </label>
                             </div>
-
-                        @endforeach
-
-                    </div>
-
-                    <label class="form-label mb-3">
-                            Jenis Kelamin
-                    </label>
-
-                    <div class="col ms-2 mb-3">
-                        <div class="form-check row-sm-6">
-                            <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='jenis_kelamin' value="L">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Laki-Laki
-                            </label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="jk_p" wire:model='jenis_kelamin' value="P">
+                                <label class="form-check-label" for="jk_p">
+                                    <i class="bi bi-gender-female text-danger"></i> Perempuan
+                                </label>
+                            </div>
                         </div>
 
-                        <div class="form-check row-sm-6">
-                            <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='jenis_kelamin' value="P">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Perempuan
-                            </label>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
+                                <input type="password" id="password" class="form-control" wire:model='password' placeholder="Masukkan password">
+                                <span class="input-group-text bg-light border-start-0 rounded-end-3" style="cursor: pointer;" onclick="togglePassword()">
+                                    <i id="toggleIcon" class="bi bi-eye"></i>
+                                </span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mb-3">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" wire:model='password'>
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="password" class="form-label">Konfirmasi Password</label>
-                      <input type="password" class="form-control" id="password" wire:model='cpassword'>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6 mt-2">
-                            <button type="submit" style="width: 100%" class="btn btn-primary">Buat Akun</button>
+                        <!-- Konfirmasi Password -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Konfirmasi Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
+                                <input type="password" id="confirm-password" class="form-control" wire:model='cpassword' placeholder="Ulangi password">
+                            </div>
                         </div>
-                        <div class="col-sm-6 mt-2">
-                            <a style="width: 100%" class="btn btn-outline-primary" href="/login">Kembali Login</a>
+
+                        <!-- Tombol -->
+                        <div class="row">
+                            <div class="col-12 col-md-6 mt-2">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="bi bi-check-circle me-1"></i> Buat Akun
+                                </button>
+                            </div>
+                            <div class="col-12 col-md-6 mt-2">
+                                <a class="btn btn-outline-primary w-100" href="/login">
+                                    <i class="bi bi-arrow-left me-1"></i> Kembali Login
+                                </a>
+                            </div>
                         </div>
-                    </div>
-
-                </form>
-
-                @if(session('error'))
-                        <div id="error_msg" class="badge bg-danger fs-6 mt-3" style="width: 100%;overflow: hidden;text-overflow: -o-ellipsis-lastline;white-space: normal">
+                    </form>
+                    <!-- Error Message -->
+                    @if(session('error'))
+                        <div id="error_msg" class="alert alert-danger text-center mt-4">
                             {{ session('error') }}
                         </div>
                         <script>
-                            setTimeout(function() {
-                                var errorMsg = document.getElementById('error_msg');
-                                if (errorMsg) {
-                                    errorMsg.style.display = 'none';
-                                }
+                            setTimeout(() => {
+                                const msg = document.getElementById('error_msg');
+                                if (msg) msg.style.display = 'none';
                             }, 10000);
                         </script>
                     @endif
 
+                </div>
             </div>
         </div>
-
-      </div>
     </div>
 </div>
+<!-- Script show/hide password -->
+<script>
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    const toggleIcon = document.getElementById('toggleIcon');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        confirmPasswordInput.type = 'text';
+        toggleIcon.classList.replace('bi-eye', 'bi-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        confirmPasswordInput.type = 'password';
+        toggleIcon.classList.replace('bi-eye-slash', 'bi-eye');
+    }
+}
+</script>

@@ -1,9 +1,11 @@
 <div class="container-fluid p-0">
     <div class="row g-0">
         <!-- SIDEBAR -->
-        <aside class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
-            @include('components.navbar')
-        </aside>
+        <div class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
+            <aside class="sticky-top">
+                @include('components.navbar')
+            </aside>
+        </div>
 
         <!-- MAIN CONTENT -->
         <main class="col-12 col-lg-10 p-4" style="background-color: var(--color-bg); min-height: 100vh;">
@@ -86,55 +88,76 @@
     </div>
 
     <!-- MODAL TAMBAH MATERI -->
-    @if ($user_edit == 1)
-        <div class="modal fade" id="modalMateriTambah" tabindex="-1" aria-labelledby="modalMateriTambahLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content border-0 shadow">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title">Tambah Materi</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+@if ($user_edit == 1)
+    <div class="modal fade" id="modalMateriTambah" tabindex="-1" aria-labelledby="modalMateriTambahLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-3">
+                <div class="modal-header bg-primary text-white align-items-center">
+                    <h5 class="modal-title d-flex align-items-center" id="modalMateriTambahLabel">
+                        <i class="bi bi-plus-circle me-2 fs-5"></i> Tambah Materi
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form wire:submit.prevent='tambahMateri'>
+                    <div class="modal-body p-4">
+
+                        {{-- Judul --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Judul Materi</label>
+                            <input type="text" class="form-control" placeholder="Masukkan judul materi..." wire:model='judul'>
+                            @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+
+                        {{-- Deskripsi --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Deskripsi</label>
+                            <textarea class="form-control" rows="3" placeholder="Tuliskan deskripsi materi..." wire:model='deskripsi'></textarea>
+                            @error('deskripsi') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+
+                        {{-- Untuk Aplikasi --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Untuk Aplikasi</label>
+                            <div class="row ms-1">
+                                @foreach ($app as $a)
+                                    <div class="form-check col-sm-6 mb-2">
+                                        <input class="form-check-input" type="radio" wire:model='id_app' value="{{ $a->id }}" id="app_{{ $a->id }}">
+                                        <label class="form-check-label" for="app_{{ $a->id }}">{{ $a->nama }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @error('id_app') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+
+                        {{-- Cabang Olahraga --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Cabang Olahraga</label>
+                            <div class="row ms-1">
+                                @foreach ($data_bidang as $d)
+                                    <div class="form-check col-sm-6 mb-2">
+                                        <input class="form-check-input" type="radio" wire:model='id_bidang' value="{{ $d->id }}" id="bidang_{{ $d->id }}">
+                                        <label class="form-check-label" for="bidang_{{ $d->id }}">{{ $d->bidang }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @error('id_bidang') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+
                     </div>
 
-                    <form wire:submit='tambahMateri'>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Judul</label>
-                                <input type="text" class="form-control" wire:model='judul'>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Deskripsi</label>
-                                <textarea class="form-control" wire:model='deskripsi'></textarea>
-                            </div>
-
-                            <label class="form-label fw-semibold">Untuk Aplikasi</label>
-                            <div class="row ms-2 mb-3">
-                                @foreach ($app as $a)
-                                    <div class="form-check col-sm-6">
-                                        <input class="form-check-input" type="radio" wire:model='id_app' value="{{ $a->id }}">
-                                        <label class="form-check-label">{{ $a->nama }}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-
-                            <label class="form-label fw-semibold">Cabang Olahraga</label>
-                            <div class="row ms-2 mb-3">
-                                @foreach ($data_bidang as $d)
-                                    <div class="form-check col-sm-6">
-                                        <input class="form-check-input" type="radio" wire:model='id_bidang' value="{{ $d->id }}">
-                                        <label class="form-check-label">{{ $d->bidang }}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="modal-footer border-top">
+                        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle me-1"></i> Tutup
+                        </button>
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-save2 me-1"></i> Simpan
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    @endif
+    </div>
+@endif
+
 </div>

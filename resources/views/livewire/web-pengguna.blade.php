@@ -1,12 +1,12 @@
 <div class="row g-0">
-    {{-- Sidebar --}}
+    <!-- Sidebar Navigation -->
     <div class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
         <aside class="sticky-top">
             @include('components.navbar')
         </aside>
     </div>
 
-    {{-- Main Content --}}
+    <!-- Main Content Area -->
     <main class="col-12 col-lg-10 p-4">
         <div class="container-fluid p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -72,146 +72,202 @@
                 </div>
             </div>
 
-            {{-- Modal Tambah --}}
-            <div wire:ignore.self class="modal fade" id="addUserModal" tabindex="-1">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header bg-primary text-white">
-                            <h5 class="modal-title">Tambah Pengguna</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control" wire:model="username">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" wire:model="nama">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Tanggal Lahir</label>
-                                <input type="date" class="form-control" wire:model="tanggal_lahir">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Jenis Kelamin</label><br>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" value="L" wire:model="jenis_kelamin"> Laki-laki
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" value="P" wire:model="jenis_kelamin"> Perempuan
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Role</label>
-                                <select class="form-select" wire:model="id_role">
-                                    @foreach ($role as $r)
-                                        <option value="{{ $r->id }}">{{$r->nama}}</option>
-                                    @endforeach
-                                </select>
-                                <div>@error('id_role') {{ $message }} @enderror</div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Bidang</label>
-                                @foreach ($data_bidang as $d)
-                                    <div class="form-check col-sm-6">
-                                        <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='id_bidang' value="{{ $d->id }}">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            {{ $d->bidang }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control" wire:model="password">
-                                <div>@error('password') {{ $message }} @enderror</div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button class="btn btn-primary" wire:click="storeUser">Simpan</button>
-                        </div>
+<!-- Modal Tambah -->
+<form wire:ignore.self class="modal fade" id="addUserModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">
+                    <i class="bi bi-person-plus-fill me-2"></i> Tambah Pengguna
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body row g-3">
+                <!-- ALERT VALIDASI -->
+                @if ($errors->any())
+                    <div id="error_msg" class="alert alert-danger">
+                        <strong>Terjadi kesalahan!</strong>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $err)
+                                <li>{{ $err }}</li>
+                            @endforeach
+                        </ul>
                     </div>
+                    <script>
+                            setTimeout(function() {
+                                var errorMsg = document.getElementById('error_msg');
+                                if (errorMsg) {
+                                    errorMsg.style.display = 'none';
+                                }
+                            }, 10000);
+                        </script>
+                @endif
+
+                <div class="col-md-6">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" wire:model="username">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" wire:model="nama">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Tanggal Lahir</label>
+                    <input type="date" class="form-control" wire:model="tanggal_lahir">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Jenis Kelamin</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="L" wire:model="jenis_kelamin"> Laki-laki
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="P" wire:model="jenis_kelamin"> Perempuan
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Role</label>
+                    <select class="form-select" wire:model="id_role">
+                        <option value="">Pilih...</option>
+                        <option value="1">Admin</option>
+                        <option value="2">User</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Bidang</label>
+                    @foreach ($data_bidang as $d)
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" wire:model='id_bidang' value="{{ $d->id }}">
+                            <label class="form-check-label">{{ $d->bidang }}</label>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" wire:model="password">
                 </div>
             </div>
 
-            {{-- Modal Edit --}}
-            <div wire:ignore.self class="modal fade" id="editUserModal" tabindex="-1">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header bg-warning text-white">
-                            <h5 class="modal-title">Edit Pengguna</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control" wire:model="username_edit">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" wire:model="nama_edit">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Tanggal Lahir</label>
-                                <input type="date" class="form-control" wire:model="tanggal_lahir_edit">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Jenis Kelamin</label><br>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" value="L" wire:model="jenis_kelamin_edit"> Laki-laki
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" value="P" wire:model="jenis_kelamin_edit"> Perempuan
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Role</label>
-                                <select class="form-select" wire:model="id_role_edit">
-                                    @foreach ($role as $r)
-                                        <option value="{{ $r->id }}">{{$r->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Bidang</label>
-                                @foreach ($data_bidang as $d)
-                                    <div class="form-check col-sm-6">
-                                        <input class="form-check-input" type="radio" id="flexRadioDefault1" wire:model='id_bidang_edit' value="{{ $d->id }}">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            {{ $d->bidang }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button class="btn btn-warning text-white" wire:click="updateUser">Perbarui</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Modal Hapus --}}
-            <div wire:ignore.self class="modal fade" id="deleteUserModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header bg-danger text-white">
-                            <h5 class="modal-title">Hapus Pengguna</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            Yakin ingin menghapus pengguna ini?
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button class="btn btn-danger" wire:click="confirmDelete">Hapus</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Batal
+                </button>
+                <button class="btn btn-primary" wire:click="storeUser">
+                    <i class="bi bi-save"></i> Simpan
+                </button>
             </div>
         </div>
-    </main>
-</div>
+    </div>
+</form>
+
+<!-- Modal Edit -->
+<form wire:ignore.self class="modal fade" id="editUserModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title">
+                    <i class="bi bi-pencil-square me-2"></i> Edit Pengguna
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body row g-3">
+                {{-- ALERT VALIDASI --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Terjadi kesalahan!</strong>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $err)
+                                <li>{{ $err }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <div class="col-md-6">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" wire:model="username_edit">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" wire:model="nama_edit">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Tanggal Lahir</label>
+                    <input type="date" class="form-control" wire:model="tanggal_lahir_edit">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Jenis Kelamin</label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="L" wire:model="jenis_kelamin_edit"> Laki-laki
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" value="P" wire:model="jenis_kelamin_edit"> Perempuan
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Role</label>
+                    <select class="form-select" wire:model="id_role_edit">
+                        <option value="1">Admin</option>
+                        <option value="2">User</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Bidang</label>
+                    @foreach ($data_bidang as $d)
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" wire:model='id_bidang_edit' value="{{ $d->id }}">
+                            <label class="form-check-label">{{ $d->bidang }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Batal
+                </button>
+                <button class="btn btn-warning text-white" wire:click="updateUser">
+                    <i class="bi bi-save2-fill"></i> Perbarui
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Modal Hapus -->
+<form wire:ignore.self class="modal fade" id="deleteUserModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="bi bi-trash3-fill me-2"></i> Hapus Pengguna
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Yakin ingin menghapus pengguna ini? Tindakan ini tidak dapat dibatalkan.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Batal
+                </button>
+                <button class="btn btn-danger" wire:click="confirmDelete">
+                    <i class="bi bi-trash"></i> Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
