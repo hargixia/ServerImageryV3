@@ -1,7 +1,4 @@
 <div>
-    @if (Auth::check() && Auth::user()->nama)
-        @include('components.header')
-    @endif  
     @if (count($kuisoner) <=0)
         <div class="alert alert-warning text-center" role="alert">
             Tidak ada kuisoner tersedia untuk materi ini.

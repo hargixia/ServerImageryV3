@@ -1,7 +1,4 @@
 <div class="container-fluid p-0">
-    @if (Auth::check() && Auth::user()->nama)
-        @include('components.header')
-    @endif
 <div class="row g-0">
     <!-- Sidebar Navigation -->
     <div class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
