@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\User;
 use App\Models\bidang;
+use App\Models\role;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
@@ -16,6 +17,7 @@ class WebPengguna extends Component
 
     public $data_bidang;
     public $pengguna;
+    public $role;
 
     // input tambah
     public $username, $nama, $tanggal_lahir, $jenis_kelamin, $id_role, $id_bidang, $password, $biang_teks;
@@ -28,6 +30,7 @@ class WebPengguna extends Component
 
     public function mount(){
         $this->data_bidang = bidang::all();
+        $this->role = role::all();
     }
 
     public function render()
@@ -44,7 +47,7 @@ class WebPengguna extends Component
             'nama' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
-            'id_role' => 'required|in:1,2',
+            'id_role' => 'required',
             'id_bidang' => 'required|integer',
             'password' => 'required|min:6',
         ]);

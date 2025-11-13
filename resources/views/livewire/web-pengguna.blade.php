@@ -105,10 +105,11 @@
                             <div class="col-md-6">
                                 <label class="form-label">Role</label>
                                 <select class="form-select" wire:model="id_role">
-                                    <option value="">Pilih...</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">User</option>
+                                    @foreach ($role as $r)
+                                        <option value="{{ $r->id }}">{{$r->nama}}</option>
+                                    @endforeach
                                 </select>
+                                <div>@error('id_role') {{ $message }} @enderror</div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Bidang</label>
@@ -168,8 +169,9 @@
                             <div class="col-md-6">
                                 <label class="form-label">Role</label>
                                 <select class="form-select" wire:model="id_role_edit">
-                                    <option value="1">Admin</option>
-                                    <option value="2">User</option>
+                                    @foreach ($role as $r)
+                                        <option value="{{ $r->id }}">{{$r->nama}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6">
