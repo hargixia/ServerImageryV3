@@ -202,7 +202,7 @@
                         <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                         <li><a class="dropdown-item" href="/materi">Daftar Materi</a></li>
                         @if (Auth::check() && Auth::user()->id_role == 1)
-                            <li><a class="dropdown-item" href="/pengguna">Daftar Pengguna</a></li>
+                            <li><a class="dropdown-item" href="/pengaturan-akun">Daftar Pengguna</a></li>
                         @endif
                     </ul>
                 </div>
