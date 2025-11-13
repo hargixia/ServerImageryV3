@@ -1,18 +1,16 @@
 <div class="container-fluid p-0">
-    @if (Auth::check() && Auth::user()->nama)
-        @include('components.header')
-    @endif
     <div class="row g-0">
         <!-- SIDEBAR -->
-        <div class="col-2 bg-light border-end vh-100 p-3 position-sticky top-0 d-none d-md-block">
-            <aside class="sticky-top">
+        <div class="col-2 bg-light border-end p-3 d-none d-md-block"
+             style="position: sticky; top: 80px; height: calc(100vh - 80px); overflow-y: auto;">
+            <aside>
                 @include('components.navbar')
             </aside>
         </div>
 
+
         <!-- MAIN CONTENT -->
         <main class="col-12 col-lg-10 p-4" style="background-color: var(--color-bg); min-height: 100vh;">
-            <!-- HEADER -->
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
                 <h2 class="fw-bold text-primary mb-2">
                     <i class="bi bi-journal-text me-2"></i> Daftar Materi
@@ -105,21 +103,21 @@
                 <form wire:submit.prevent='tambahMateri'>
                     <div class="modal-body p-4">
 
-                        {{-- Judul --}}
+                        <!-- Judul Materi -->
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Judul Materi</label>
                             <input type="text" class="form-control" placeholder="Masukkan judul materi..." wire:model='judul'>
                             @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
-                        {{-- Deskripsi --}}
+                        <!-- Deskripsi Materi -->
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Deskripsi</label>
                             <textarea class="form-control" rows="3" placeholder="Tuliskan deskripsi materi..." wire:model='deskripsi'></textarea>
                             @error('deskripsi') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
-                        {{-- Untuk Aplikasi --}}
+                        <!-- Untuk Aplikasi -->
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Untuk Aplikasi</label>
                             <div class="row ms-1">
@@ -133,7 +131,7 @@
                             @error('id_app') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
-                        {{-- Cabang Olahraga --}}
+                        <!-- Cabang Olahraga -->
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Cabang Olahraga</label>
                             <div class="row ms-1">

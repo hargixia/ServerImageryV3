@@ -1,14 +1,13 @@
 <div class="container-fluid py-0">
-    @if (Auth::check() && Auth::user()->nama)
-        @include('components.header')
-    @endif
     <div class="row mt-2">
         <!-- NAVBAR SAMPING -->
-        <div class="col-12 col-md-3 col-lg-2 mb-3 mb-md-0">
-            <aside class="sticky-top">
+        <div class="col-2 bg-light border-end p-3 d-none d-md-block"
+             style="position: sticky; top: 80px; height: calc(100vh - 80px); overflow-y: auto;">
+            <aside>
                 @include('components.navbar')
             </aside>
         </div>
+
 
         <!-- KONTEN UTAMA -->
         <main class="col-12 col-md-9 col-lg-10">
