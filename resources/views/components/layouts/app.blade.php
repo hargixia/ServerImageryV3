@@ -15,6 +15,9 @@
         <!-- Bootstrap Icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+        <!-- chart -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+
         <style>
         /* 🔹 Hilangkan margin/padding default */
         html, body {
@@ -221,7 +224,7 @@
                         <a href="/logout" class="dropdown-item-custom text-danger">Logout</a>
                     </div>
                 </div>
-           
+
         </div>
     </header>
     @endif
