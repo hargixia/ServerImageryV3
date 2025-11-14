@@ -1,125 +1,139 @@
-<div>
-    perkembangan
+<div class="container-fluid p-0">
+    <div class="row g-0">
 
-    <h1>
-        <p>judul : {{ $materi->judul }}</p>
-        <p>bidang : {{$bidang->bidang}}</p>
-    </h1>
-
-    <div class="card">
-        <div class="card-body">
-            <p>Nama : {{$user->nama}}</p>
-            <p>Umur : {{ $umur }} tahun</p>
-            <p>Bidang : {{$user_bidang->bidang}}</p>
-            <p>Jumlah Soal Yang di Kerjakan : {{count($data_kuisoner)}}</p>
-            <p>Rata-Rata Nilai : {{$rata_nilai}}</p>
-            <p>Kategori : {{$rata_kategori}}</p>
+        <!-- SIDEBAR -->
+        <div class="col-2 bg-light border-end p-3 d-none d-md-block"
+             style="position: sticky; top: 80px; height: calc(100vh - 80px); overflow-y:auto;">
+            <aside>
+                @include('components.navbar')
+            </aside>
         </div>
-    </div>
 
-    <h4 class="mt-3">Grafik Perkembangan Anda</h4>
-    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        <!-- MAIN CONTENT -->
+        <main class="col-12 col-md-10 p-4">
 
-    <h4>List Data Histori Anda</h4>
-    @foreach ($data_kuisoner as $i=> $dk)
-        <div class="card mb-2">
-            <div class="card-body">
-                <div class="row">
-                    <div class='col'>
-                        {{ $i+1 }}
-                    </div>
-                    <div class='col'>
-                        @php
-                            $daten = new datetime($dk->created_at);
-                        @endphp
+            <!-- HEADER -->
+            <div class="mb-4">
+                <h1 class="fw-bold text-primary">{{ $materi->judul }}</h1>
+                <h5 class="text-secondary">
+                    Bidang: <span class="fw-semibold">{{ $bidang->bidang }}</span>
+                </h5>
+            </div>
 
-                        <div class="col">
-                            <div class="row">
-                                Dilakukan Pada: {{$daten->format('d - F - Y, H:i:s') }}
-                            </div>
-                            <div class="row">
-                                Hari : {{ $daten->format('l') }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="row">
-                            Nilai:
-                        </div>
-                        <div class="row">
-                            {{ $dk->nilai }}
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="row">
-                            Kategori
-                        </div>
-                        <div class="row">
-                            {{ $dk->kategori }}
-                        </div>
-                    </div>
-
-                </div>
-                <div class="card-subtitle">
-                    <div class="row">
-                        <div class="col">
-
-                        </div>
-                        <div class="col">
-                            Rekomendasi:
-                        </div>
-
-                        <div class="col">
-                            {{ $dk->rekomendasi }}
-                        </div>
-                    </div>
+            <!-- CARD INFORMASI -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body">
+                    <p><strong>Nama:</strong> {{ $user->nama }}</p>
+                    <p><strong>Umur:</strong> {{ $umur }} tahun</p>
+                    <p><strong>Bidang:</strong> {{ $user_bidang->bidang }}</p>
+                    <p><strong>Jumlah Soal Yang Dikerjakan:</strong> {{ count($data_kuisoner) }}</p>
+                    <p><strong>Rata-Rata Nilai:</strong> {{ $rata_nilai }}</p>
+                    <p><strong>Kategori:</strong> {{ $rata_kategori }}</p>
                 </div>
             </div>
-        </div>
-    @endforeach
 
-    <script>
-        @php
-            $i = 0;
-            echo 'let yValues = [';
-            foreach ($data_kuisoner as $dk){
-                echo $dk->nilai .', ';
-            }
-            echo '];';
+            <!-- GRAFIK -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-header bg-primary text-white rounded-top-4">
+                    <h5 class="mb-0">Grafik Perkembangan Anda</h5>
+                </div>
 
-            echo 'let xValues = [';
-            foreach ($data_kuisoner as $dk){
-                echo $i++ .', ';
-            }
-            echo '];';
-        @endphp
+                <div class="card-body">
+                    <canvas id="myChart" class="w-100" style="max-height: 350px;"></canvas>
+                </div>
+            </div>
 
-        const ctx = document.getElementById('myChart');
+            <!-- HISTORI -->
+            <h4 class="fw-bold mb-3">Riwayat Pengerjaan</h4>
 
-        new Chart(ctx, {
+            @foreach ($data_kuisoner as $i => $dk)
+                @php $daten = new DateTime($dk->created_at); @endphp
+
+                <div class="card shadow-sm border-0 rounded-4 mb-3">
+                    <div class="card-body">
+
+                        <div class="row text-center text-md-start">
+                            <div class="col-md-1 fw-bold fs-4 text-primary">
+                                {{ $i + 1 }}
+                            </div>
+
+                            <div class="col-md-4 mb-2">
+                                <p class="mb-1"><strong>Dilakukan Pada:</strong> {{ $daten->format('d F Y, H:i:s') }}</p>
+                                <p class="mb-1"><strong>Hari:</strong> {{ $daten->format('l') }}</p>
+                            </div>
+
+                            <div class="col-md-3 mb-2">
+                                <p class="mb-1"><strong>Nilai:</strong></p>
+                                <p class="fs-5 fw-bold">{{ $dk->nilai }}</p>
+                            </div>
+
+                            <div class="col-md-2 mb-2">
+                                <p class="mb-1"><strong>Kategori:</strong></p>
+                                <span class="badge bg-info text-dark px-3 py-2">
+                                    {{ $dk->kategori }}
+                                </span>
+                            </div>
+
+                            <div class="col-md-2">
+                                <p class="mb-1"><strong>Rekomendasi:</strong></p>
+                                <p class="text-secondary small">{{ $dk->rekomendasi }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+
+        </main>
+
+    </div>
+</div>
+
+<!-- CHART JS -->
+<script>
+    @php
+        $points = [];
+        $labels = [];
+        foreach ($data_kuisoner as $index => $dk) {
+            $points[] = $dk->nilai;
+            $labels[] = $index + 1;
+        }
+    @endphp
+
+    const yValues = @json($points);
+    const xValues = @json($labels);
+
+    new Chart(document.getElementById('myChart'), {
         type: "line",
         data: {
             labels: xValues,
             datasets: [{
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
-            data: yValues
+                label: "Nilai Anda",
+                fill: false,
+                tension: 0.3,
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 3,
+                pointBackgroundColor: "rgba(54, 162, 235, 1)",
+                data: yValues
             }]
         },
         options: {
+            responsive: true,
             plugins: {
-            legend: {display:false},
-            title: {
-                display: true,
-                text: "House Prices vs. Size",
-                font: {size:16}
-            }
+                legend: { display: true },
+                title: {
+                    display: true,
+                    text: "Perkembangan Nilai Anda",
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                    ticks: { stepSize: 10 }
+                }
             }
         }
-        });
-    </script>
-</div>
+    });
+</script>
