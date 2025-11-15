@@ -20,7 +20,7 @@
                             <!-- Kiri: Foto Profil -->
                             <div class="col-md-3 text-center mb-3">
                                 <div class="position-relative d-inline-block">
-                                    @if ($foto)
+                                    @if (Auth::user()->foto)
                                         <img src="{{ asset('storage/'.$foto) }}" class="rounded-circle shadow" width="150" height="150">
                                     @else
                                         <img src="{{ asset('images/default_user.png') }}" class="rounded-circle shadow" width="150" height="150">
@@ -38,12 +38,12 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">User ID</label>
-                                        <input type="text" class="form-control" value="{{ $id }}" disabled>
+                                        <input type="text" class="form-control" value="" disabled>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Username</label>
-                                        <input type="text" class="form-control" value="{{ $username }}" disabled>
+                                        <input type="text" class="form-control" value="{{ Auth::user()->username }}" disabled>
                                     </div>
 
                                     <div class="col-md-6">
@@ -59,9 +59,8 @@
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Jenis Kelamin</label>
                                         <select class="form-select" wire:model.defer="jenis_kelamin">
-                                            <option value="">Pilih</option>
-                                            <option value="Laki-laki">Laki-laki</option>
-                                            <option value="Perempuan">Perempuan</option>
+                                            <option value="L" {{ $jenis_kelamin === "L" ? 'Checked' : ''}}>Laki-laki</option>
+                                            <option value="P" {{ $jenis_kelamin === "P" ? 'Checked' : ''}}>Perempuan</option>
                                         </select>
                                     </div>
 
@@ -77,9 +76,8 @@
 
                         <!-- Info Sistem -->
                         <div class="row text-secondary small">
-                            <div class="col-md-4"><strong>Dibuat:</strong> {{ $created_at }}</div>
-                            <div class="col-md-4"><strong>Terakhir Diperbarui:</strong> {{ $updated_at }}</div>
-                            <div class="col-md-4"><strong>Login Status:</strong> {{ $login_stat ? 'Aktif' : 'Tidak Aktif' }}</div>
+                            <div class="col-md-4"><strong>Dibuat:</strong> {{ Auth::user()->created_at }}</div>
+                            <div class="col-md-4"><strong>Login Status:</strong> {{ Auth::user()->login_stat ? 'Aktif' : 'Tidak Aktif' }}</div>
                         </div>
 
                         <div class="mt-4 text-end">
