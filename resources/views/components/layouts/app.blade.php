@@ -205,7 +205,7 @@
                         <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
                         <li><a class="dropdown-item" href="/materi">Daftar Materi</a></li>
                         @if (Auth::check() && Auth::user()->id_role == 1)
-                            <li><a class="dropdown-item" href="/pengaturan-akun">Daftar Pengguna</a></li>
+                            <li><a class="dropdown-item" href="/pengguna">Daftar Pengguna</a></li>
                         @endif
                     </ul>
                 </div>
@@ -220,7 +220,7 @@
 
                     <!-- Dropdown menu -->
                     <div class="dropdown-menu-custom shadow-sm" id="profileMenu">
-                        <a href="/akun" class="dropdown-item-custom">My Profile</a>
+                        <a href="/pengaturan-akun" class="dropdown-item-custom">My Profile</a>
                         <a href="/logout" class="dropdown-item-custom text-danger">Logout</a>
                     </div>
                 </div>

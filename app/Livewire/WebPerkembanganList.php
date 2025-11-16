@@ -41,8 +41,24 @@ class WebPerkembanganList extends Component
     public $rata_nilai = 0;
     public $rata_kategori;
 
+    public $soal_dikerjakan = [];
+    public $rata2nilai = [];
+    public $performa = [];
+
     public function tampilkan($id){
         return redirect('/materi/detail/'.$this->id.'/perkembangan/d/'.$id);
+    }
+
+    public function banding($val1,$val2){
+        $i = 0;
+        if($val1 == $val2){
+            $i = 0;
+        }elseif($val1 < $val2){
+            $i = -1;
+        }else{
+            $i = 1;
+        }
+        return $i;
     }
 
     public function mount(){
@@ -52,10 +68,42 @@ class WebPerkembanganList extends Component
         }
 
         $user = User::all();
-        foreach($user as $u){
+        foreach($user as $index => $u){
             $finder = data_kuisoner::where('id_materi',$this->id)->where('id_user',$u->id)->get()->first();
             if($finder){
                 array_push($this->listUser,$u);
+                $temp_total_dikerjakan = data_kuisoner::where('id_materi',$this->id)->where('id_user',$u->id)->get();
+                array_push($this->soal_dikerjakan, count($temp_total_dikerjakan));
+
+                $nilai = 0;
+                foreach($temp_total_dikerjakan as $t){
+                    $nilai += $t->nilai;
+                }
+
+                $temp_rata2 = number_format($nilai / count($temp_total_dikerjakan),2);
+                array_push($this->rata2nilai,$temp_rata2);
+
+                $da = data_kuisoner::where('id_materi',$this->id)->where('id_user',$u->id)->orderBy('created_at','desc')->get();
+                if(count($da) >= 10){
+                    $da = data_kuisoner::where('id_materi',$this->id)->where('id_user',$u->id)->orderBy('created_at','desc')->take(10)->get();
+                }
+                $temp = [];
+                $kesimpulan = ['Turun','Stabil','Naik'];
+                $n = 0;
+                $c = 0;
+                for($i = 0; $i < count($da);$i++){
+                    if(($i+1) == count($da)){
+                        break;
+                    }
+                    $a = $da[$i]->nilai;
+                    $b = $da[$i+1]->nilai;
+                    $ab = $this->banding($a,$b);
+                    $n += $ab;
+                    $c += 1;
+                    array_push($temp,[$a,$b,$ab,$c]);
+                }
+                $sum = $n/$c;
+                array_push($this->performa,$kesimpulan[$sum + 1]);
             }
         }
 
