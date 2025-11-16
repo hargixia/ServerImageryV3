@@ -2,10 +2,41 @@
 
 namespace App\Livewire;
 
+use App\Models\data_materi_detail;
+use App\Models\data_tugas;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class WebTugas extends Component
 {
+
+    public $id, $idmd;
+    public $materi_detail;
+    public $tugas = array();
+    public $t_isi, $status, $file;
+
+    public function mount(){
+        $this->materi_detail = data_materi_detail::where('id',$this->idmd)->get()->first();
+        $temp = [
+            $this->materi_detail->isi_tugas,
+            $this->materi_detail->exp,
+            $this->materi_detail->start,
+            $this->materi_detail->stop,
+        ];
+        array_push($this->tugas,$temp);
+    }
+
+    public function kirimTugas(){
+        $tgs = new data_tugas();
+        $tgs->isi = $this->t_isi;
+        $tgs->status = true;
+        $tgs->nilai = 0;
+        $tgs->id_materi = $this->id;
+        $tgs->id_user = Auth::user()->id;
+        $tgs->save();
+        
+    }
+
     public function render()
     {
         return view('livewire.web-tugas');

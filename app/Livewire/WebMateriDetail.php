@@ -83,6 +83,7 @@ class WebMateriDetail extends Component
 
     public function hapusMD($id){
         data_materi_detail::where('id', $id)->delete();
+        return redirect("/materi/detail/".$this->id);
     }
 
     public function materiTampil($idmd){
@@ -93,6 +94,10 @@ class WebMateriDetail extends Component
 
     public function lakukanTest(){
         return redirect('/materi/'.$this->id.'/t/'.$this->mode);
+    }
+
+    public function kerjakanTugas($idmd){
+        return redirect('/materi/detail/'.$this->id.'/tugas/'.$idmd);
     }
 
     public function tambahMateri($idm,$tipe){

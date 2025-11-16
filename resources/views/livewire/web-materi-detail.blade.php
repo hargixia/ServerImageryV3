@@ -100,7 +100,7 @@
                                 <div class="mt-3 d-flex flex-wrap gap-2">
                                     <button type="button"
                                             class="btn btn-outline-secondary btn-sm fw-semibold"
-                                            wire:click='materiTampil({{ $md->id }})'>
+                                            @if ($md->tugas == 1) wire:click='kerjakanTugas({{ $md->id }})' @endif>
                                         <i class="bi bi-clipboard2-check me-1"></i> Lihat Tugas
                                     </button>
 
@@ -132,7 +132,7 @@
         </main>
 
         <!-- Modal Pilih Tipe Materi -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content border-0 shadow-lg rounded-4">
                     <div class="modal-header bg-primary text-white rounded-top-4">
