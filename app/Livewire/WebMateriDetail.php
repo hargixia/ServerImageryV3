@@ -57,12 +57,6 @@ class WebMateriDetail extends Component
         $this->m_app = $app;
         $this->m_bidang = $bidang;
 
-        if($kc->msg == $this->mode){
-            $this->lakukanTest();
-        }else{
-            $this->mode = "PostTest";
-        }
-
         $this->m_detail = data_materi_detail::where('id_materi',$this->id)->get();
         $sesion = session('user_edit', false);
         $author = $materi->id_authors;
@@ -70,6 +64,11 @@ class WebMateriDetail extends Component
             $this->user_edit = true;
         }else{
             $this->user_edit = false;
+            if($kc->msg == $this->mode){
+                $this->lakukanTest();
+            }else{
+                $this->mode = "PostTest";
+            }
         }
 
     }
