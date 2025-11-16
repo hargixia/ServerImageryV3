@@ -16,7 +16,10 @@ class WebMateriDetailTampil extends Component
     public $materiNow;
 
     public function mount(){
-        $this->materiNow = data_materi_detail::find($this->idmd)->get()->first();
+        $this->materiNow = data_materi_detail::where('id',$this->idmd)->get()->first();
+        if($this->materiNow == null){
+            $this->kembali();
+        }
     }
 
     public function render()

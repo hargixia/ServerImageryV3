@@ -11,7 +11,6 @@ use Livewire\Component;
 use App\Http\Controllers\api_kuisoner;
 use Illuminate\Support\Facades\Auth;
 
-use function PHPUnit\Framework\isEmpty;
 
 class WebMateriDetail extends Component
 {
@@ -64,11 +63,12 @@ class WebMateriDetail extends Component
             $this->user_edit = true;
         }else{
             $this->user_edit = false;
-            if($kc->msg == $this->mode){
-                $this->lakukanTest();
-            }else{
-                $this->mode = "PostTest";
-            }
+        }
+
+        if($kc->msg == $this->mode && $this->user_edit == false){
+            $this->lakukanTest();
+        }else{
+            $this->mode = "PostTest";
         }
 
     }
