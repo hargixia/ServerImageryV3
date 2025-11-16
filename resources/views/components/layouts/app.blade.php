@@ -197,18 +197,34 @@
         <div class="d-flex align-items-center">
             <!-- Tombol menu untuk layar kecil -->
                 <div class="dropdown d-md-none">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-list"></i>
-                    </button>
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-list"></i>
+    </button>
 
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
-                        <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-                        <li><a class="dropdown-item" href="/materi">Daftar Materi</a></li>
-                        @if (Auth::check() && Auth::user()->id_role == 1)
-                            <li><a class="dropdown-item" href="/pengguna">Daftar Pengguna</a></li>
-                        @endif
-                    </ul>
-                </div>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
+            <!-- MENU UTAMA -->
+            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+            <li><a class="dropdown-item" href="/materi">Daftar Materi</a></li>
+
+            @if (Auth::check() && Auth::user()->id_role == 1)
+                <li><a class="dropdown-item" href="/pengguna">Daftar Pengguna</a></li>
+            @endif
+
+            <!-- PEMISAH -->
+            <li><hr class="dropdown-divider"></li>
+
+            <!-- BAGIAN BAWAH (MY PROFILE + LOGOUT) -->
+            <li><a class="dropdown-item text-primary fw-semibold" href="/pengaturan-akun">
+                <i class="bi bi-person-circle me-2"></i> My Profile
+            </a></li>
+
+            <li>
+                <a class="dropdown-item text-primary fw-semibold" href="/logout">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout </a>
+            </li>
+        </ul>
+    </div>
+
                 <span class="me-3 fw-bold text-capitalize d-none d-md-inline" style="font-size:1.1rem;">
                     Hallo {{ Auth::user()->nama }}!
                 </span>
