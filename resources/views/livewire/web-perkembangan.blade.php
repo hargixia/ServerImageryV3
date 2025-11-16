@@ -29,6 +29,7 @@
                     <p><strong>Jumlah Soal Yang Dikerjakan:</strong> {{ count($data_kuisoner) }}</p>
                     <p><strong>Rata-Rata Nilai:</strong> {{ $rata_nilai }}</p>
                     <p><strong>Kategori:</strong> {{ $rata_kategori }}</p>
+                    <p><strong>Perfoma Anda:</strong> {{ $performa }}</p>
                 </div>
             </div>
 
@@ -130,8 +131,8 @@
             scales: {
                 y: {
                     min: 0,
-                    max: 100,
-                    ticks: { stepSize: 10 }
+                    max: 110,
+                    ticks: { stepSize: 2 }
                 }
             }
         }

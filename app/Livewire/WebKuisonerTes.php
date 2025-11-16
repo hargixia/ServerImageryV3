@@ -63,6 +63,10 @@ class WebKuisonerTes extends Component
         }
     }
 
+    public function kembali(){
+        return redirect('/materi/detail/'.$this->id);
+    }
+
     public function render()
     {
         return view('livewire.web-kuisoner-tes');
@@ -88,7 +92,7 @@ class WebKuisonerTes extends Component
         $sender = "kj>>" . $this->id . ">>" . Auth::user()->id . ">>" . $this->mode . ">>" . $jawab_kirim;
         $data = json_decode($api->kuisoner_jawab(base64_encode($sender)));
         $this->kirim = json_encode($data);
-        $this->nilai = intval(json_encode($data->res[0]->nilai));
+        $this->nilai = json_encode($data->res[0]->nilai);
         $this->rekomendasi = json_encode($data->res[0]->rekomendasi);
         $this->kategori = json_encode($data->res[0]->kategori);
     }

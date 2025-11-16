@@ -71,7 +71,7 @@
 
             <!-- List Materi -->
             @if (count($m_detail) > 0)
-                <div class="row">
+                <div class="row" wire:poll>
                 @foreach ($m_detail as $md)
                     <div class="col-12 mb-3">
                         <div class="card shadow-sm border-0 rounded-4 h-100">
@@ -98,20 +98,20 @@
                                 @endif
 
                                 <div class="mt-3 d-flex flex-wrap gap-2">
-                                    <button type="button" 
+                                    <button type="button"
                                             class="btn btn-outline-secondary btn-sm fw-semibold"
                                             wire:click='materiTampil({{ $md->id }})'>
                                         <i class="bi bi-clipboard2-check me-1"></i> Lihat Tugas
                                     </button>
 
-                                    <button type="button" 
+                                    <button type="button"
                                             class="btn btn-outline-primary btn-sm fw-semibold"
                                             wire:click='materiTampil({{ $md->id }})'>
                                         <i class="bi bi-book-open me-1"></i> Baca
                                     </button>
 
                                     @if ($user_edit == 1)
-                                        <button type="button" 
+                                        <button type="button"
                                                 class="btn btn-outline-danger btn-sm fw-semibold"
                                                 wire:click='hapusMD({{ $md->id }})'>
                                             <i class="bi bi-trash3 me-1"></i> Hapus Materi

@@ -14,7 +14,7 @@
 
             <!-- HEADER -->
             <div class="mb-4 text-center text-md-start">
-                <h1 class="fw-bold text-primary mb-2">Isi Kuesioner</h1>
+                <h1 class="fw-bold text-primary mb-2">Isi {{$mode }}</h1>
                 <p class="text-secondary mb-0">
                     Jawablah setiap pertanyaan dengan jujur dan sesuai pendapat Anda.
                 </p>
@@ -22,53 +22,68 @@
 
             <!-- TOMBOL KEMBALI -->
             <div class="mb-4 text-center text-md-start">
-                <a href="{{ url()->previous() }}" 
-                   class="btn btn-outline-secondary px-4 py-2 fw-semibold shadow-sm">
+                <button
+                   class="btn btn-outline-secondary px-4 py-2 fw-semibold shadow-sm" wire:click='kembali'>
                     <i class="bi bi-arrow-left-circle me-2"></i> Kembali
-                </a>
+                </button>
             </div>
 
-            @if (count($kuisoner) <= 0)
-                <div class="alert alert-warning text-center shadow-sm" role="alert">
-                    <i class="bi bi-exclamation-circle me-2"></i>
-                    Tidak ada kuesioner tersedia untuk materi ini.
+            <!-- FEEDBACK SELESAI -->
+            @if ($kirim != null)
+                <div class="alert alert-success text-center mt-4 shadow-sm">
+                    🎉 Selamat! Kamu telah menyelesaikan kuesioner ini.
+                    <p>Nilai Anda adalah {{$nilai}}</p>
+                    <p>Dengan Kategori {{$kategori}}</p>
+                    <hr>
+                    @if ($rekomendasi == "")
+                        <p>Anda direkomendasikan : {{$rekomendasi}}</p>
+                        <p></p>
+                    @endif
                 </div>
             @else
-                @foreach ($kuisoner as $k)
-                    <div class="card mb-4 shadow-sm border-0 rounded-4 w-100">
-                        <div class="card-body">
-                            <h5 class="card-title text-primary mb-3">
-                                <i class="bi bi-question-circle me-2"></i>
-                                Soal Nomor {{ $k->no }}
-                            </h5>
-                            <p class="card-text fs-5 mb-4">{{ $k->soal }}</p>
+                @if (count($kuisoner) <= 0)
+                    <div class="alert alert-warning text-center shadow-sm" role="alert">
+                        <i class="bi bi-exclamation-circle me-2"></i>
+                        Tidak ada kuesioner tersedia untuk materi ini.
+                    </div>
+                @else
+                    @foreach ($kuisoner as $k)
+                        <div class="card mb-4 shadow-sm border-0 rounded-4 w-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary mb-3">
+                                    <i class="bi bi-question-circle me-2"></i>
+                                    Soal Nomor {{ $k->no }}
+                                </h5>
+                                <p class="card-text fs-5 mb-4">{{ $k->soal }}</p>
 
-                            <div class="row gy-2">
-                                @foreach ($opsi as $i => $o)
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-check ps-4">
-                                            <input 
-                                                class="form-check-input me-2" 
-                                                type="radio" 
-                                                name="soal_{{ $k->no }}" 
-                                                id="soal_{{ $k->no }}_{{ $i }}" 
-                                                wire:click="jawab({{ $k->no }}, '{{ $i+1 }}')">
-                                            <label class="form-check-label" for="soal_{{ $k->no }}_{{ $i }}">
-                                                {{ $o }}
-                                            </label>
+                                <div class="row gy-2">
+                                    @foreach ($opsi as $i => $o)
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-check ps-4">
+                                                <input
+                                                    class="form-check-input me-2"
+                                                    type="radio"
+                                                    name="soal_{{ $k->no }}"
+                                                    id="soal_{{ $k->no }}_{{ $i }}"
+                                                    wire:click="jawab({{ $k->no }}, '{{ $i }}')">
+                                                <label class="form-check-label" for="soal_{{ $k->no }}_{{ $i }}">
+                                                    {{ $o }}
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+            @endif
+
 
                 <!-- TOMBOL KIRIM -->
                 <div class="text-center mt-4">
-                    <button type="button" 
+                    <button type="button"
                             class="btn btn-primary btn-lg px-5 py-2 fw-semibold shadow-sm"
-                            data-bs-toggle="modal" 
+                            data-bs-toggle="modal"
                             data-bs-target="#confirmModal">
                         <i class="bi bi-send-fill me-2"></i> Kirim Jawaban
                     </button>
@@ -96,9 +111,9 @@
                                 <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">
                                     Batal
                                 </button>
-                                <button type="button" 
+                                <button type="button"
                                         class="btn btn-primary px-4"
-                                        wire:click="kirimJawaban" 
+                                        wire:click="kirimJawaban"
                                         data-bs-dismiss="modal">
                                     <i class="bi bi-check-circle me-1"></i> Ya, Kirim
                                 </button>
@@ -107,12 +122,6 @@
                     </div>
                 </div>
 
-                <!-- FEEDBACK SELESAI -->
-                @if ($kirim != null)
-                    <div class="alert alert-success text-center mt-4 shadow-sm">
-                        🎉 Selamat! Kamu telah menyelesaikan kuesioner ini.
-                    </div>
-                @endif
             @endif
         </main>
     </div>

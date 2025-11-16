@@ -15,7 +15,7 @@
 
                 <!-- Judul & Deskripsi -->
                 <div class="text-center mb-4">
-                    <h2 class="fw-bold text-primary">{{ $materiNow->judul }}</h2>
+                    <h2 class="fw-bold text-primary">{{ $materiNow->judul }} , {{$materiNow->id}}</h2>
                     <p class="text-muted">{{ $materiNow->deskripsi }}</p>
                     <span class="badge bg-info text-dark text-uppercase px-3 py-2">
                         {{ $materiNow->tipe }}
@@ -41,7 +41,7 @@
 
                     @elseif ($materiNow->tipe == 'gambar')
                         <div class="text-center mt-3">
-                            <img src="{{ asset('images/materi/' . $materiNow->isi) }}"
+                            <img src="{{ $materiNow->isi }}"
                                  alt="{{ $materiNow->judul }}"
                                  class="img-fluid rounded shadow-sm"
                                  style="max-height: 500px; object-fit: contain;">

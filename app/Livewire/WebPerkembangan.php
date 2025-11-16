@@ -28,7 +28,10 @@ class WebPerkembangan extends Component
     public $rata_nilai = 0;
     public $rata_kategori;
 
+    public $performa;
+
     public function mount(){
+        $this->performa = session('performa_user','Tidak ada');
         $this->materi = data_materi::find($this->id);
         $author = $this->materi->id_authors;
 
