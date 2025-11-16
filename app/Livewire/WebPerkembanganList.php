@@ -84,26 +84,34 @@ class WebPerkembanganList extends Component
                 array_push($this->rata2nilai,$temp_rata2);
 
                 $da = data_kuisoner::where('id_materi',$this->id)->where('id_user',$u->id)->orderBy('created_at','desc')->get();
-                if(count($da) >= 10){
+                if(count($da) >= 11){
                     $da = data_kuisoner::where('id_materi',$this->id)->where('id_user',$u->id)->orderBy('created_at','desc')->take(10)->get();
                 }
+
                 $temp = [];
-                $kesimpulan = ['Turun','Stabil','Naik'];
-                $n = 0;
-                $c = 0;
-                for($i = 0; $i < count($da);$i++){
-                    if(($i+1) == count($da)){
-                        break;
+                $list_kesimpulan = ['Turun','Stabil','Naik'];
+                $kesimpulan = "Tidak Ada";
+                $index = 0;
+                if(count($da) >=2 ){
+                    $n = 0;
+                    $c = 0;
+                    for($i = 0; $i < count($da);$i++){
+                        if(($i+1) == count($da)){
+                            break;
+                        }
+                        $a = $da[$i]->nilai;
+                        $b = $da[$i+1]->nilai;
+                        $ab = $this->banding($a,$b);
+                        $n += $ab;
+                        $c += 1;
+                        array_push($temp,[$a,$b,$ab,$c]);
                     }
-                    $a = $da[$i]->nilai;
-                    $b = $da[$i+1]->nilai;
-                    $ab = $this->banding($a,$b);
-                    $n += $ab;
-                    $c += 1;
-                    array_push($temp,[$a,$b,$ab,$c]);
+                    $index = $n/$c;
+                    $kesimpulan = $list_kesimpulan[$index + 1];
                 }
-                $sum = $n/$c;
-                array_push($this->performa,$kesimpulan[$sum + 1]);
+
+                array_push($this->performa,$kesimpulan);
+                session(['performa_user'=>$kesimpulan]);
             }
         }
 
