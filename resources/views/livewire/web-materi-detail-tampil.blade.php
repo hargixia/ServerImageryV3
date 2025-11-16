@@ -34,7 +34,7 @@
                     @elseif ($materiNow->tipe == 'video')
                         <div class="ratio ratio-16x9 shadow-sm rounded overflow-hidden">
                             <video controls>
-                                <source src="{{ asset('images/materi/' . $materiNow->isi) }}" type="video/mp4">
+                                <source src="{{$materiNow->isi }}" type="video/mp4">
                                 Browser Anda tidak mendukung video tag.
                             </video>
                         </div>
@@ -50,7 +50,7 @@
                     @elseif ($materiNow->tipe == 'audio')
                         <div class="card border-0 shadow-sm p-4 bg-light text-center">
                             <audio controls class="w-100">
-                                <source src="{{ asset('images/materi/' . $materiNow->isi) }}" type="audio/mpeg">
+                                <source src="{{ $materiNow->isi }}" type="audio/mpeg">
                                 Browser Anda tidak mendukung audio tag.
                             </audio>
                         </div>

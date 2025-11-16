@@ -98,6 +98,10 @@
                             Simpan
                         </button>
                     </div>
+
+                    <div wire:loading wire:target="detail_file">
+                        Saving post...
+                    </div>
                 </form>
             </div>
         </main>
