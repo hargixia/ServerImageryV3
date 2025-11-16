@@ -71,7 +71,7 @@
 
             <!-- List Materi -->
             @if (count($m_detail) > 0)
-                <div class="row" wire:poll>
+                <div class="row">
                 @foreach ($m_detail as $md)
                     <div class="col-12 mb-3">
                         <div class="card shadow-sm border-0 rounded-4 h-100">
