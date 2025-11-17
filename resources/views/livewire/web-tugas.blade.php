@@ -3,7 +3,7 @@
         Isi Soal : {{ $tugas[0][0] }}
     </p>
 
-    <Form wire:submit='kirimTugas()'>
+    <Form wire:submit='simpanTugas()'>
         <p>
         Isi Tugas:
         </p>
@@ -11,6 +11,6 @@
 
         </textarea>
 
-        <input type="submit" class="btn btn-primary" value="Kirim Tugas">
+        <input type="submit" class="btn btn-primary" value="Simpan">
     </Form>
 </div>

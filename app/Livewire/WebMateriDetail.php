@@ -10,10 +10,12 @@ use Livewire\Component;
 
 use App\Http\Controllers\api_kuisoner;
 use Illuminate\Support\Facades\Auth;
-
+use Livewire\Attributes\Title;
 
 class WebMateriDetail extends Component
 {
+    #[Title('Detail Materi')]
+
     public $id;
     public $idm;
     public $m_judul;
@@ -26,6 +28,10 @@ class WebMateriDetail extends Component
     public $user_edit = false;
 
     public $m_detail;
+    public $ctime;
+    public $md_ts = array();
+    public $md_te = array();
+    public $md_exp = array();
 
     public $tipe_pilih = '';
     public $tipe_list = [
@@ -41,6 +47,8 @@ class WebMateriDetail extends Component
     public function mount($id){
 
         $this->id = $id;
+
+        $this->ctime = date('Y-m-d H:i:s');
 
         $ak = new api_kuisoner();
         $idu = Auth::user()->id;
@@ -65,7 +73,18 @@ class WebMateriDetail extends Component
             $this->user_edit = false;
         }
 
-        if($kc->msg == $this->mode && $this->user_edit == false){
+        foreach($this->m_detail as $md){
+            $oritime_s = strtotime($md->start);
+            array_push($this->md_ts,date("Y-m-d H:i:s",$oritime_s));
+
+            $oritime_e = strtotime($md->stop);
+            array_push($this->md_te,date("Y-m-d H:i:s",$oritime_e));
+
+
+            array_push($this->md_exp,$md->exp);
+        }
+
+        if($kc->msg == $this->mode || $this->user_edit == false){
             $this->lakukanTest();
         }else{
             $this->mode = "PostTest";
@@ -97,7 +116,7 @@ class WebMateriDetail extends Component
     }
 
     public function kerjakanTugas($idmd){
-        return redirect('/materi/detail/'.$this->id.'/tugas/'.$idmd);
+        return redirect('/materi/detail/'.$this->id.'/tugas/d/'.$idmd);
     }
 
     public function tambahMateri($idm,$tipe){

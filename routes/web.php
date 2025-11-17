@@ -29,6 +29,7 @@ route::get('/register',WebRegister::class)->name('register');
 route::middleware('auth')->group(function(){
     route::get('/dashboard',WebDashboard::class);
     route::get('/materi',WebMateri::class);
+
     route::get('/materi/detail/{id}',WebMateriDetail::class);
     route::get('/materi/detail/{id}/tambah',WebMateriDetailTambah::class);
     route::get('/materi/detail/{id}/kuisoner',WebKuisonerTambah::class);
@@ -38,7 +39,7 @@ route::middleware('auth')->group(function(){
     route::get('/materi/detail/{id}/perkembangan',WebPerkembanganList::class);
     route::get('/materi/detail/{id}/perkembangan/d/{idu}',WebPerkembangan::class);
 
-    route::get('/materi/detail/{id}/tugas/{idmd}',WebTugas::class);
+    route::get('/materi/detail/{id}/tugas/d/{idmd}',WebTugas::class);
 
     route::get('/pengguna',WebPengguna::class);
     route::get('pengaturan-akun',WebAkun::class);
