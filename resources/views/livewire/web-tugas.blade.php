@@ -1,3 +1,16 @@
 <div>
-    {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
+    <p>
+        Isi Soal : {{ $tugas[0][0] }}
+    </p>
+
+    <Form wire:submit='kirimTugas()'>
+        <p>
+        Isi Tugas:
+        </p>
+        <textarea wire:model='t_isi'>
+
+        </textarea>
+
+        <input type="submit" class="btn btn-primary" value="Kirim Tugas">
+    </Form>
 </div>

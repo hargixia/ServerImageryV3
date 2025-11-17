@@ -19,6 +19,10 @@ class WebMateriDetailTambah extends Component
     public $tugas_exp, $tugas_start_date, $tugas_start_time, $tugas_stop_date, $tugas_stop_time, $isi_tugas;
     public $start_combine, $stop_combine;
 
+    protected $rules = [
+        'detail_file' => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:102400'
+    ];
+
 
     public $tipe_pilih = '';
     public $tipe_list = [
@@ -36,8 +40,10 @@ class WebMateriDetailTambah extends Component
     }
 
     public function tambahMateri(){
+
         $isian = "";
         if($this->tipe_pilih != $this->tipe_list[$this->tipe_default]){
+            $this->validateOnly('detail_file');
             $nama_file = $this->detail_file->getClientOriginalName();
             $this->detail_file->storeAs(path: $this->tipe_pilih, name:$nama_file, options:'uploads');
             $isian = config('app.url') . "/storage//".$this->tipe_pilih."/" . $nama_file;
