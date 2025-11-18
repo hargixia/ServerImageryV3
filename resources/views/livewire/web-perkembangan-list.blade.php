@@ -11,22 +11,22 @@
         <!-- MAIN -->
         <main class="col-12 col-lg-10 p-4">
 
-            <h4 class="mb-4 fw-bold">Daftar Performa Siswa</h4>
+            <h1 class="mb-4 fw-bold text-primary">Daftar Performa Siswa</h4>
 
             @foreach ($listUser as $i => $lu)
                 <div class="card shadow-sm mb-3 w-100 p-3">
 
-                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
 
                         <!-- INFO USER -->
-                        <div class="mb-2" style="min-width: 200px;">
+                        <div class="text-center text-md-start mb-3 mb-md-0">
                             <h5 class="fw-bold mb-1">{{ $lu->nama }}</h5>
                             <p class="mb-0 text-muted">Soal dikerjakan: {{ $soal_dikerjakan[$i] }}</p>
                             <p class="mb-0 text-muted">Rata-rata nilai: {{ $rata2nilai[$i] }}</p>
                         </div>
 
                         <!-- STATUS PERFORMA -->
-                        <div class="mb-2" style="min-width: 180px;">
+                        <div class="text-center text-md-start mb-3 mb-md-0">
                             <span class="badge 
                                 @if($performa[$i] == 'baik') bg-success
                                 @elseif($performa[$i] == 'cukup') bg-warning
@@ -37,8 +37,8 @@
                         </div>
 
                         <!-- DETAIL BUTTON -->
-                        <div>
-                            <a wire:click='tampilkan({{ $lu->id }})' class="btn btn-primary">
+                        <div class="text-center">
+                            <a wire:click='tampilkan({{ $lu->id }})' class="btn btn-primary mt-2 mt-md-0">
                                 Detail Performa
                             </a>
                         </div>
@@ -47,6 +47,7 @@
 
                 </div>
             @endforeach
+
 
         </main>
     </div>
