@@ -12,7 +12,7 @@ use PHPUnit\Event\Tracer\Tracer;
 class WebLogin extends Component
 {
 
-    #[Title('Masuk Ke Aplikasi Imagery')]
+    #[Title('Masuk Ke Aplikasi PENU')]
 
     #[Validate('required')]
     public $username = '';

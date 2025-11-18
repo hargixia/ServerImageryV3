@@ -20,6 +20,13 @@
                 </h5>
             </div>
 
+            <!-- TOMBOL KEMBALI -->
+            <div class="mb-4 text-center text-md-start">
+                <button
+                   class="btn btn-outline-secondary px-4 py-2 fw-semibold shadow-sm" wire:click='kembali'>
+                    <i class="bi bi-arrow-left-circle me-2"></i> Kembali
+                </button>
+            </div>
             <!-- CARD INFORMASI -->
             <div class="card shadow-sm border-0 rounded-4 mb-4">
                 <div class="card-body">
@@ -54,9 +61,6 @@
                     <div class="card-body">
 
                         <div class="row text-center text-md-start">
-                            <div class="col-md-1 fw-bold fs-4 text-primary">
-                                {{ $i + 1 }}
-                            </div>
 
                             <div class="col-md-4 mb-2">
                                 <p class="mb-1"><strong>Dilakukan Pada:</strong> {{ $daten->format('d F Y, H:i:s') }}</p>
@@ -121,7 +125,7 @@
         options: {
             responsive: true,
             plugins: {
-                legend: { display: true },
+                legend: { display: false },
                 title: {
                     display: true,
                     text: "Perkembangan Nilai Anda",
