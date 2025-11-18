@@ -42,32 +42,38 @@
             </div>
 
             <!-- Tombol Utama -->
-            <div class="row mt-4 mb-4 justify-content-center sticky-top bg-white py-2 shadow-sm rounded">
-                <div class="col-12 col-sm-3 mb-2 mb-sm-0">
-                    <button type="button" class="btn btn-danger w-100 fw-semibold" wire:click='lakukanTest'>
-                        <i class="bi bi-pencil-square me-2"></i> Lakukan Test
-                    </button>
-                </div>
-                <div class="col-12 col-sm-3 mb-2 mb-sm-0">
-                    <button type="button" class="btn btn-success w-100 fw-semibold" wire:click='kePerkembangan'>
-                        <i class="bi bi-bar-chart-line me-2"></i> Lihat Perkembangan
-                    </button>
-                </div>
+            <div class="card p-3 mt-4 mb-4 shadow-sm border-0 rounded-3">
+                <div class="row justify-content-center text-center">
 
-                @if ($user_edit == 1)
-                    <div class="col-12 col-sm-3 mb-2 mb-sm-0">
-                        <button type="button" class="btn btn-primary w-100 fw-semibold" wire:click='tambahKuisoner({{$idm}})'>
-                            <i class="bi bi-pencil-square me-2"></i> Edit Test
+                    <div class="col-12 col-md-3 mb-2">
+                        <button type="button" class="btn btn-danger w-100 fw-semibold" wire:click='lakukanTest'>
+                            <i class="bi bi-pencil-square me-2"></i> Lakukan Tes
                         </button>
                     </div>
 
-                    <div class="col-12 col-sm-3">
-                        <button type="button" class="btn btn-primary w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="bi bi-plus-circle me-2"></i> Tambah Materi
+                    <div class="col-12 col-md-3 mb-2">
+                        <button type="button" class="btn btn-success w-100 fw-semibold" wire:click='kePerkembangan'>
+                            <i class="bi bi-bar-chart-line me-2"></i> Lihat Perkembangan
                         </button>
                     </div>
-                @endif
+
+                    @if ($user_edit == 1)
+                        <div class="col-12 col-md-3 mb-2">
+                            <button type="button" class="btn btn-primary w-100 fw-semibold" wire:click='tambahKuisoner({{$idm}})'>
+                                <i class="bi bi-pencil-square me-2"></i> Edit Tes
+                            </button>
+                        </div>
+
+                        <div class="col-12 col-md-3 mb-2">
+                            <button type="button" class="btn btn-primary w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="bi bi-plus-circle me-2"></i> Tambah Materi
+                            </button>
+                        </div>
+                    @endif
+
+                </div>
             </div>
+
 
             <!-- List Materi -->
             @if (count($m_detail) > 0)
@@ -100,7 +106,7 @@
                                 <div class="mt-3 d-flex flex-wrap gap-2">
                                     <button type="button"
                                             class="btn btn-outline-secondary btn-sm fw-semibold"
-                                            @if ($md->tugas == 1) wire:click='kerjakanTugas({{ $md->id }})' @endif>
+                                            @if ($md->tugas == 1) wire:click='kerjakanTugas({{ $md->id }})' @else disabled @endif>
                                         <i class="bi bi-clipboard2-check me-1"></i> Lihat Tugas
                                     </button>
 
@@ -113,7 +119,9 @@
                                     @if ($user_edit == 1)
                                         <button type="button"
                                                 class="btn btn-outline-danger btn-sm fw-semibold"
-                                                wire:click='hapusMD({{ $md->id }})'>
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalHapusMateri"
+                                                >
                                             <i class="bi bi-trash3 me-1"></i> Hapus Materi
                                         </button>
                                     @endif
@@ -171,5 +179,42 @@
                 </div>
             </div>
         </div>
+
+        <!-- MODAL KONFIRMASI HAPUS -->
+<div class="modal fade" id="modalHapusMateri" tabindex="-1" aria-labelledby="modalHapusMateriLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 shadow">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold text-danger" id="modalHapusMateriLabel">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i> Konfirmasi Hapus
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <p class="mb-0 text-secondary">
+                    Apakah Anda yakin ingin menghapus <strong>detail materi ini</strong>?<br>
+                    Tindakan ini tidak dapat dibatalkan.
+                </p>
+            </div>
+
+            <div class="modal-footer border-0 d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">
+                   <i class="bi bi-cross-circle me-1"></i> Batal
+                </button>
+
+                <button type="button"
+                        class="btn btn-danger px-4"
+                        wire:click='hapusMD({{ $md->id }})'
+                        data-bs-dismiss="modal">
+                    <i class="bi bi-check-circle me-1"></i> Ya, Hapus
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
     </div>
 </div>

@@ -51,8 +51,16 @@
                 <div class="row g-4">
                     @foreach ($data_materi as $dm)
                         <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="card-m h-100 shadow-sm border-0 rounded-4"
+                            <div class="card-m h-100 shadow-sm border-0 rounded-4 position-relative"
                                 style="background-color: var(--color-card); transition: 0.3s;">
+
+                                <!-- Tombol Hapus -->
+                                <button class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 rounded-circle"
+                                        style="width: 35px; height: 35px; display:flex; align-items:center; justify-content:center;"
+                                        wire:click="hapusMateri({{ $dm->id }})">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+
                                 <div class="card-body d-flex flex-column justify-content-between">
 
                                     <!-- Gambar dan teks -->
@@ -65,15 +73,17 @@
                                         <h5 class="card-title text-primary fw-bold d-flex align-items-center">
                                             <i class="bi bi-book me-2 text-secondary"></i> {{ $dm->judul }}
                                         </h5>
+
                                         <p class="card-text text-muted small mb-4" style="line-height: 1.4;">
                                             {{ Str::limit($dm->deskripsi, 100) }}
                                         </p>
                                     </div>
 
                                     <a href="/materi/detail/{{ $dm->id }}"
-                                        class="btn btn-outline-primary rounded-pill w-100 mt-auto fw-semibold">
+                                    class="btn btn-outline-primary rounded-pill w-100 mt-auto fw-semibold">
                                         <i class="bi bi-eye me-1"></i> Lihat Detail
                                     </a>
+
                                 </div>
                             </div>
                         </div>

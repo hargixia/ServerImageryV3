@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class WebMateriDetail extends Component
 {
+    #[Title('Materi Detail')]
+
     public $id;
     public $idm;
     public $m_judul;

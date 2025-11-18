@@ -11,6 +11,7 @@ class WebMateriDetailTambah extends Component
 {
     use WithFileUploads;
 
+    #[Title('Tambah Detail')]
     public $id;
     public $detail_judul, $detail_deskripsi, $detail_isi, $detail_file;
 
