@@ -78,7 +78,7 @@
             <!-- List Materi -->
             @if (count($m_detail) > 0)
                 <div class="row">
-                @foreach ($m_detail as $md)
+                @foreach ($m_detail as $i => $md)
                     <div class="col-12 mb-3">
                         <div class="card shadow-sm border-0 rounded-4 h-100">
                             <div class="card-body">
@@ -94,9 +94,16 @@
                                 <p class="card-text text-secondary mb-3">{{ $md->deskripsi }}</p>
 
                                 @if ($md->tugas == 1)
-                                    <span class="badge bg-warning text-dark me-2">
-                                        <i class="bi bi-clipboard-check me-1"></i> Tugas Tersedia
-                                    </span>
+                                    @if($md_exp[$i] != 0 || $md_te[$i] < $ctime)
+                                        <span class="badge bg-danger">
+                                            <i class="bi bi-clipboard-x me-1"></i> Tugas Telah Ditutup
+                                        </span>
+                                    @else
+                                        <span class="badge bg-warning text-dark me-2">
+                                            <i class="bi bi-clipboard-check me-1"></i> Tugas Tersedia
+                                            @if($md_ts[$i] > $ctime) Pada {{ $md_ts[$i] }}@endif
+                                        </span>
+                                    @endif
                                 @else
                                     <span class="badge bg-secondary">
                                         <i class="bi bi-clipboard-x me-1"></i> Tidak Ada Tugas
@@ -106,7 +113,8 @@
                                 <div class="mt-3 d-flex flex-wrap gap-2">
                                     <button type="button"
                                             class="btn btn-outline-secondary btn-sm fw-semibold"
-                                            @if ($md->tugas == 1) wire:click='kerjakanTugas({{ $md->id }})' @else disabled @endif>
+                                            @if ($md->tugas == 1 && $md->exp == 0 && $md_ts[$i] < $ctime && $md_te[$i] > $ctime)
+                                            wire:click='kerjakanTugas({{ $md->id }})' @else disabled @endif>
                                         <i class="bi bi-clipboard2-check me-1"></i> Lihat Tugas
                                     </button>
 

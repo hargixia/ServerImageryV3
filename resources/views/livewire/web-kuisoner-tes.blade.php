@@ -76,18 +76,18 @@
                             </div>
                         </div>
                     @endforeach
-            @endif
 
 
-                <!-- TOMBOL KIRIM -->
-                <div class="text-center mt-4">
-                    <button type="button"
-                            class="btn btn-primary btn-lg px-5 py-2 fw-semibold shadow-sm"
-                            data-bs-toggle="modal"
-                            data-bs-target="#confirmModal">
+                    <!-- TOMBOL KIRIM -->
+                    <div class="text-center mt-4">
+                        <button type="button"
+                        class="btn btn-primary btn-lg px-5 py-2 fw-semibold shadow-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#confirmModal">
                         <i class="bi bi-send-fill me-2"></i> Kirim Jawaban
                     </button>
                 </div>
+            @endif
 
                 <!-- MODAL KONFIRMASI -->
                 <div wire:ignore.self class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
