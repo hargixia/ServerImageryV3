@@ -18,8 +18,8 @@ return new class extends Migration
             $table->float('nilai');
             $table->timestamps();
 
-            $table->foreignId('id_materi_detail')->constrained('data_materi_details','id');
-            $table->foreignId('id_user')->constrained('users','id');
+            $table->foreignId('id_materi_detail')->references('id')->on('data_materi_details');
+            $table->foreignId('id_user')->references('id')->on('users');
         });
     }
 

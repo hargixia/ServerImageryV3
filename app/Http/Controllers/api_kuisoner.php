@@ -116,9 +116,9 @@ class api_kuisoner extends Controller
                 $temp = Controller::splitterv2($data[$i]);
                 $temp_reko = data_rekomendasi::where('id_pertanyaan',$temp[0])->get()->first();
                 $temp_tipe = kuisoner_pertanyaan::where('id',$temp[0])->get()->first();
-                $cnilai = (int)$temp[1];
+                $cnilai = (int)$temp[1] + 1;
                 if($temp_tipe->tipe == 'N'){
-                    $cnilai = ($cApps->jumlah_pertanyaan - $cnilai)+1;
+                    $cnilai = ($cApps->jumlah_pertanyaan+1) - $cnilai;
                 }
                 array_push($temp,$cnilai);
                 array_push($temp,$temp_reko->nilai);
