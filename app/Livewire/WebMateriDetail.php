@@ -84,7 +84,7 @@ class WebMateriDetail extends Component
             array_push($this->md_exp,$md->exp);
         }
 
-        if($kc->msg == $this->mode || $this->user_edit == false){
+        if($kc->msg == $this->mode && $this->user_edit == false){
             $this->lakukanTest();
         }else{
             $this->mode = "PostTest";
@@ -116,7 +116,7 @@ class WebMateriDetail extends Component
     }
 
     public function kerjakanTugas($idmd){
-        return redirect('/materi/detail/'.$this->id.'/tugas/d/'.$idmd);
+        return redirect('/materi/detail/'.$this->id.'/tugas');
     }
 
     public function tambahMateri($idm,$tipe){

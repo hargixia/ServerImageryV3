@@ -17,6 +17,7 @@ use App\Livewire\WebPerkembangan;
 use App\Livewire\WebPerkembanganList;
 use App\Livewire\WebRegister;
 use App\Livewire\WebTugas;
+use App\Livewire\WebTugasList;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,7 +40,8 @@ route::middleware('auth')->group(function(){
     route::get('/materi/detail/{id}/perkembangan',WebPerkembanganList::class);
     route::get('/materi/detail/{id}/perkembangan/d/{idu}',WebPerkembangan::class);
 
-    route::get('/materi/detail/{id}/tugas/d/{idmd}',WebTugas::class);
+    route::get('/materi/detail/{id}/tugas/{data}',WebTugas::class);
+    route::get('/materi/detail/{id}/tugas',WebTugasList::class);
 
     route::get('/pengguna',WebPengguna::class);
     route::get('pengaturan-akun',WebAkun::class);
