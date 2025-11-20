@@ -113,17 +113,25 @@
                                 <div class="mt-3 d-flex flex-wrap gap-2">
                                     <button type="button"
                                             class="btn btn-outline-secondary btn-sm fw-semibold"
-                                            @if ($md->tugas == 1 && $md->exp == 0 && $md_ts[$i] < $ctime && $md_te[$i] > $ctime)
-                                            wire:click='kerjakanTugas({{ $md->id }})' @else disabled @endif>
+                                            wire:click='kerjakanTugas({{ $md->id }})'>
                                         <i class="bi bi-clipboard2-check me-1"></i> Lihat Tugas
                                     </button>
 
-                                    @if ($user_edit == 1)
+                                    @if ($user_edit == 1 && $md->exp == 0 && $md_ts[$i] < $ctime && $md_te[$i] > $ctime)
                                         <button type="button"
                                                 class="btn btn-outline-danger btn-sm fw-semibold"
                                                 data-bs-toggle="modal"
                                                 wire:click='tutupTugas({{ $md->id }})'
                                                 > Tutup Tugas
+                                        </button>
+                                    @endif
+
+                                    @if ($user_edit == 1 && $md->exp == 1 && $md_ts[$i] < $ctime && $md_te[$i] > $ctime)
+                                        <button type="button"
+                                                class="btn btn-outline-danger btn-sm fw-semibold"
+                                                data-bs-toggle="modal"
+                                                wire:click='bukaTugas({{ $md->id }})'
+                                                > Buka Tugas
                                         </button>
                                     @endif
 
@@ -231,7 +239,7 @@
             </div>
         </div>
 
-        
+
 
     </div>
 </div>

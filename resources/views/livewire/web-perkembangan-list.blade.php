@@ -21,13 +21,14 @@
                         <!-- INFO USER -->
                         <div class="text-center text-md-start mb-3 mb-md-0">
                             <h5 class="fw-bold mb-1">{{ $lu->nama }}</h5>
+                            <p class="mb-0 text-muted">Bidang : {{ $dbidang[$i] }}</p>
                             <p class="mb-0 text-muted">Soal dikerjakan: {{ $soal_dikerjakan[$i] }}</p>
                             <p class="mb-0 text-muted">Rata-rata nilai: {{ $rata2nilai[$i] }}</p>
                         </div>
 
                         <!-- STATUS PERFORMA -->
                         <div class="text-center text-md-start mb-3 mb-md-0">
-                            <span class="badge 
+                            <span class="badge
                                 @if($performa[$i] == 'baik') bg-success
                                 @elseif($performa[$i] == 'cukup') bg-warning
                                 @else bg-danger @endif

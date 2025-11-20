@@ -26,6 +26,7 @@ class WebMateriDetail extends Component
 
     public $mode = "PreTest";
     public $user_edit = false;
+    public $user_nilai_tugas = [];
 
     public $m_detail;
     public $ctime;
@@ -108,6 +109,13 @@ class WebMateriDetail extends Component
     public function tutupTugas($id){
         data_materi_detail::where('id', $id)->update([
             'exp' => 1
+        ]);
+        return redirect("/materi/detail/".$this->id);
+    }
+
+    public function bukaTugas($id){
+        data_materi_detail::where('id', $id)->update([
+            'exp' => 0
         ]);
         return redirect("/materi/detail/".$this->id);
     }

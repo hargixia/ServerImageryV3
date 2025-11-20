@@ -89,6 +89,29 @@
                 </div>
             @endforeach
 
+            <p>Tugas</p>
+            <p>Jumlah Tugas : {{$ntugas}}</p>
+            <p>Jumlah Dikerjakan : {{$t_dikerjakan}}</p>
+            <p>Jumlah Tidak Dikerjakan : {{$t_n_dikerjakan}}</p>
+            <p>Rata-Rata Nilai : {{$t_rata}}</p>
+            <hr>
+
+            Riwayat Tugas
+            @php
+                $no = 1;
+            @endphp
+            @foreach ($dtugas as $dt)
+                @if ($dt[2] == 1)
+                    <p> No. {{$no}} | Dari Materi : {{$dt[1], }}</p>
+                    <p> Soal => {{$dt[3]}}</p>
+                    <p> Jawaban => {{$dt[4]}}</p>
+                    <p> Nilai => {{$dt[5]}}</p>
+                    @php
+                        $no++;
+                    @endphp
+                @endif
+            @endforeach
+
         </main>
 
     </div>
