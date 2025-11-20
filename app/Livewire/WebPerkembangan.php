@@ -40,7 +40,6 @@ class WebPerkembangan extends Component
                 return redirect('/materi/detail/'.$this->id.'/perkembangan/d/'.Auth::user()->id);
             }
         }
-
         $this->data_kuisoner = data_kuisoner::where('id_user', $this->idu)->where('id_materi',$this->id)->get();
         $this->bidang = bidang::where('id',$this->materi->id_bidangs)->get()->first();
 
@@ -66,6 +65,10 @@ class WebPerkembangan extends Component
             }
         }
 
+    }
+
+    public function kembali(){
+        return redirect("/materi/detail/".$this->id);
     }
 
     public function render()

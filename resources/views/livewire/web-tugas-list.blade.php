@@ -1,6 +1,4 @@
 <div>
-    {{-- The whole world belongs to you. --}}
-
     @foreach ($dtugas as $t)
         <div class=card>
             <div class="card-body">
