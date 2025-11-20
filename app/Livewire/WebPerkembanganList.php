@@ -37,7 +37,7 @@ class WebPerkembanganList extends Component
     public $bidang;
 
     public $user;
-    public $user_bidang;
+    public $dbidang = [];
     public $rata_nilai = 0;
     public $rata_kategori;
 
@@ -70,6 +70,8 @@ class WebPerkembanganList extends Component
         $user = User::all();
         foreach($user as $index => $u){
             $finder = data_kuisoner::where('id_materi',$this->id)->where('id_user',$u->id)->get()->first();
+            $find_bidang  = bidang::where('id',$u->id_bidang)->get()->first();
+            array_push($this->dbidang,$find_bidang->bidang);
             if($finder){
                 array_push($this->listUser,$u);
                 $temp_total_dikerjakan = data_kuisoner::where('id_materi',$this->id)->where('id_user',$u->id)->get();
@@ -90,7 +92,7 @@ class WebPerkembanganList extends Component
 
                 $temp = [];
                 $list_kesimpulan = ['Turun','Stabil','Naik'];
-                $kesimpulan = "Tidak Ada";
+                $kesimpulan = "Belum Terlihat Perkembangannya";
                 $index = 0;
                 if(count($da) >=2 ){
                     $n = 0;

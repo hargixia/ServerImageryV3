@@ -6,6 +6,8 @@ use App\Models\bidang;
 use App\Models\data_kategori;
 use App\Models\data_kuisoner;
 use App\Models\data_materi;
+use App\Models\data_materi_detail;
+use App\Models\data_tugas;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
@@ -28,10 +30,15 @@ class WebPerkembangan extends Component
     public $rata_nilai = 0;
     public $rata_kategori;
 
+    public $md;
+    public $dtugas =[];
+    public $ntugas = 0;
+    public $t_dikerjakan = 0 , $t_n_dikerjakan = 0, $t_rata = 0;
+
     public $performa;
 
     public function mount(){
-        $this->performa = session('performa_user','Tidak ada');
+        $this->performa = session('performa_user','Belum Terlihat Perkembangannya');
         $this->materi = data_materi::find($this->id);
         $author = $this->materi->id_authors;
 
@@ -40,7 +47,37 @@ class WebPerkembangan extends Component
                 return redirect('/materi/detail/'.$this->id.'/perkembangan/d/'.Auth::user()->id);
             }
         }
+
+        $this->md = data_materi_detail::where('id_materi',$this->id)->get();
+        $val_avg = 0;
+        foreach($this->md as $i => $m){
+            if($m->tugas == 1){
+                $utugas = data_tugas::where('id_materi_detail',$m->id)->where('id_user',$this->idu)->get()->first();
+                if($utugas){
+                    $val = $utugas->nilai;
+                    $isi = $utugas->isi;
+                    $this->t_dikerjakan += 1;
+                }else{
+                    $val = 0;
+                    $isi = "Tidak Mengerjakan";
+                    $this->t_n_dikerjakan += 1;
+                }
+                $val_avg += $val;
+                # id materi detail, judul,ada tugas, soal, isi tugas, nilai
+                $temp = [$m->id,$m->judul,1,$m->isi_tugas,$isi,$val];
+                $this->ntugas += 1;
+            }else{
+                $temp = [$m->id,$m->judul,0,"","",0];
+            }
+            array_push($this->dtugas,$temp);
+        }
+
+        if($this->ntugas != 0){
+            $this->t_rata = ($val_avg/$this->ntugas) * 100;
+        }
+
         $this->data_kuisoner = data_kuisoner::where('id_user', $this->idu)->where('id_materi',$this->id)->get();
+
         $this->bidang = bidang::where('id',$this->materi->id_bidangs)->get()->first();
 
         $tgl_lahir = date_create(Auth::user()->tanggal_lahir);

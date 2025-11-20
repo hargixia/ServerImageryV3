@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\data_materi_detail;
 use App\Models\data_tugas;
 use App\Models\User;
+use App\Models\bidang;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -16,6 +17,7 @@ class WebTugasList extends Component
     public $dtugas;
     public $duser;
     public $dmd;
+    public $dbidang = [];
 
     public function keDetail($a,$b,$c){
         $temp = base64_encode("dt>>".$a.">>".$b.">>".$c);
@@ -35,8 +37,13 @@ class WebTugasList extends Component
 
         $this->dtugas = data_tugas::where('id_materi_detail',$this->md->id)
                         ->join('users','data_tugas.id_user','=','users.id')
-                        ->select('data_tugas.*','users.nama')
+                        ->select('data_tugas.*','users.nama','users.id_bidang')
                         ->get();
+
+        foreach($this->dtugas as $dt){
+            $finder = bidang::where('id',$dt->id_bidang)->get()->first();
+            array_push($this->dbidang,$finder->bidang);
+        }
     }
 
     public function render()

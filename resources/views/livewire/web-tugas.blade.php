@@ -58,10 +58,9 @@
                         <label class="fw-semibold mb-2">Isi Jawaban:</label>
 
                         <textarea class="form-control mb-3" rows="6" wire:model="t_isi"
-                            placeholder="Tulis jawaban Anda di sini..." @if ($kirim == 3)
+                            placeholder="Tulis jawaban Anda di sini..." @if ($kirim != 0)
                                 disabled
                             @endif></textarea>
-                        {{ $kirim }}
                         @if($kirim == 0)
                             <div class="text-end">
                                 <button type="submit" class="btn btn-primary px-4">
@@ -71,18 +70,21 @@
                         @endif
                     </form>
 
-                    {{ $ss }}
-                    <p>
-                        exp {{ $materi_detail->stop }}
-                    </p>
+                    @if ($kirim == 3)
+                        @if($status == 0)
+                            <p>{{$ss}}</p>
+                        @else
+                            <p>Nilai Anda adalah {{$nilai}}</p>
+                        @endif
+                    @endif
                     @if ($kirim == 4)
                         <div class="row">
                             <div class="col">
-
+                                <Input type="number" wire:model='nilai'></Input>
                             </div>
                             <div class="col">
                                 <div class="text-end">
-                                    <button class="btn btn-primary px-4">
+                                    <button class="btn btn-primary px-4" wire:click='beriNilai()'>
                                         Beri Nilai Tugas
                                     </button>
                                 </div>

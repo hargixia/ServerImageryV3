@@ -132,9 +132,12 @@ class api_kuisoner extends Controller
             $nilai = number_format((($total / $total_maks) * 100),2);
             $rekomen = "";
             $mid = floatval($cApps->jumlah_pertanyaan / 2) + 1;
-            foreach($jawaban as $j){
+            foreach($jawaban as $i => $j){
                 if($j[1] <= $mid){
-                    $rekomen = $rekomen . $j[4] . ", ";
+                    $rekomen = $rekomen . $j[4];
+                    if($i < ($n - 1)){
+                        $rekomen = $rekomen . ", ";
+                    }
                 }
             }
 

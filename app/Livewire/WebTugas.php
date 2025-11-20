@@ -4,11 +4,10 @@ namespace App\Livewire;
 
 use App\Models\data_materi_detail;
 use App\Models\data_tugas;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-
-use function Symfony\Component\Clock\now;
 
 class WebTugas extends Component
 {
@@ -22,7 +21,7 @@ class WebTugas extends Component
     public $t_isi, $status, $file, $nilai;
     public $ctime, $md_s;
     public $kirim = 0;
-    public $ss = 0;
+    public $ss = "Belum Dinilai";
 
 
     public function cek_time($time_val1,$time_val2){
@@ -69,16 +68,20 @@ class WebTugas extends Component
             $this->t_isi = $this->dtugas->isi;
             $this->status = $this->dtugas->status;
             $this->nilai = $this->dtugas->nilai;
+        }else{
+            $this->ss = "Anda Tidak Membuat Tugas";
         }
 
-        $today = date('Y-m-d H:i:s');
-        if($this->materi_detail->stop >= $today){
-            $this->ss = 1;
-        }
+        $tgl_expired = Carbon::parse($this->materi_detail->stop);
 
-        if($this->t_isi == "" ){
+
+        if($this->t_isi == ""){
             $this->kirim = 0;
         }else{
+            $this->kirim = 3;
+        }
+
+        if($tgl_expired->isPast()){
             $this->kirim = 3;
         }
 
@@ -111,8 +114,12 @@ class WebTugas extends Component
         $this->kembali();
     }
 
-    public function beriNilai($id){
-
+    public function beriNilai(){
+        $this->dtugas->nilai = $this->nilai;
+        $this->dtugas->status = true;
+        $this->dtugas->updated_at = date("Y-m-d H:i:s");
+        $this->dtugas->save();
+        return redirect("http://localhost:8000/materi/detail/".$this->id."/tugas/".$this->data);
     }
 
     public function render()
