@@ -14,7 +14,7 @@
 
             <!-- HEADER -->
             <div class="mb-4">
-                <h1 class="fw-bold text-primary">{{ $materi->judul }}</h1>
+                <h1 class="fw-bold text-primary text-capitalize">{{ $materi->judul }}</h1>
                 <h5 class="text-secondary">
                     Bidang: <span class="fw-semibold">{{ $bidang->bidang }}</span>
                 </h5>
@@ -88,32 +88,51 @@
                     </div>
                 </div>
             @endforeach
-
-            <p>Tugas</p>
-            <p>Jumlah Tugas : {{$ntugas}}</p>
-            <p>Jumlah Dikerjakan : {{$t_dikerjakan}}</p>
-            <p>Jumlah Tidak Dikerjakan : {{$t_n_dikerjakan}}</p>
-            <p>Rata-Rata Nilai : {{$t_rata}}</p>
-            <hr>
-
-            Riwayat Tugas
+            <h4 class="fw-bold mb-3">Tugas</h4>
+            <!-- CARD INFORMASI TUGAS-->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body">
+                    <p><strong>Jumlah Tugas:</strong> {{$ntugas}}</p>
+                    <p><strong>Jumlah Dikerjakan:</strong> {{$t_dikerjakan}}</p>
+                    <p><strong>Jumlah Tidak Dikerjakan:</strong> {{$t_n_dikerjakan}}</p>
+                    <p><strong>Rata-Rata Nilai:</strong> {{$t_rata}}</p>
+                </div>
+            </div>
+            <!-- RIWAYAT TUGAS -->
+            <h4 class="fw-bold mb-3">Riwayat Tugas</h4>
             @php
                 $no = 1;
             @endphp
             @foreach ($dtugas as $dt)
                 @if ($dt[2] == 1)
-                    <p> No. {{$no}} | Dari Materi : {{$dt[1], }}</p>
-                    <p> Soal => {{$dt[3]}}</p>
-                    <p> Jawaban => {{$dt[4]}}</p>
-                    <p> Nilai => {{$dt[5]}}</p>
-                    @php
+                <div class="card shadow-sm border-0 rounded-4 mb-3">
+                    <div class="card-body">
+
+                        <div class="row text-center text-md-start">
+                            <div class="col-md-4 mb-2">
+                                <h4 class="mb-1 text-primary"><strong>No. {{$no}}</strong></h4>
+                                <p class="mb-1"><strong>Dari Materi: </strong>{{$dt[1], }}</p>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <p class="mb-1"><strong>Nilai:</strong></p>
+                                <p class="fs-5 fw-bold">{{$dt[5]}}</p>
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <p class="mb-1"><strong>Dilakukan Pada:</strong> Isi disini</p>
+                                <p class="mb-1"><strong>Hari:</strong> Isi disini</p>
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+                </div>
+                @php
                         $no++;
                     @endphp
                 @endif
             @endforeach
-
         </main>
-
     </div>
 </div>
 

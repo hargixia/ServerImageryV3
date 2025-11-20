@@ -15,7 +15,7 @@
                 <div class="d-flex flex-wrap align-items-start mb-2">
                     <div class="fw-bold me-2" style="min-width:100px;">Judul</div>
                     <div class="me-2">:</div>
-                    <div class="flex-grow-1">{{ $m_judul }}</div>
+                    <div class="flex-grow-1 text-capitalize">{{ $m_judul }}</div>
                 </div>
 
                 <div class="d-flex flex-wrap align-items-start mb-2">
@@ -83,7 +83,7 @@
                         <div class="card shadow-sm border-0 rounded-4 h-100">
                             <div class="card-body">
                                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-2">
-                                    <h5 class="card-title text-primary fw-bold mb-2 mb-md-0">
+                                    <h5 class="card-title text-primary fw-bold mb-2 mb-md-0 text-capitalize">
                                         {{ $md->judul }}
                                     </h5>
                                     <span class="badge bg-info text-dark">
