@@ -67,7 +67,6 @@ class WebMateri extends Component
         $this->data_materi = data_materi::all();
         $this->data_bidang = bidang::all();
     }
-
     public function render()
     {
         $this->FilterMateriText = $this->textList[$this->FilterMateriVal];
