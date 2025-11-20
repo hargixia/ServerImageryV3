@@ -67,6 +67,12 @@ class WebMateri extends Component
         $this->data_materi = data_materi::all();
         $this->data_bidang = bidang::all();
     }
+
+    public function hapusMateri($id){
+        data_materi::where('id',$id)->delete();
+        return redirect('/materi');
+    }
+
     public function render()
     {
         $this->FilterMateriText = $this->textList[$this->FilterMateriVal];
