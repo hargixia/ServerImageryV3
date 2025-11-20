@@ -118,6 +118,15 @@
                                         <i class="bi bi-clipboard2-check me-1"></i> Lihat Tugas
                                     </button>
 
+                                    @if ($user_edit == 1)
+                                        <button type="button"
+                                                class="btn btn-outline-danger btn-sm fw-semibold"
+                                                data-bs-toggle="modal"
+                                                wire:click='tutupTugas({{ $md->id }})'
+                                                > Tutup Tugas
+                                        </button>
+                                    @endif
+
                                     <button type="button"
                                             class="btn btn-outline-primary btn-sm fw-semibold"
                                             wire:click='materiTampil({{ $md->id }})'>
@@ -138,8 +147,42 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
+                </div>
+            <!-- MODAL KONFIRMASI HAPUS -->
+            <div class="modal fade" id="modalHapusMateri" tabindex="-1" aria-labelledby="modalHapusMateriLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-4 shadow">
 
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title fw-bold text-danger" id="modalHapusMateriLabel">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i> Konfirmasi Hapus
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p class="mb-0 text-secondary">
+                                Apakah Anda yakin ingin menghapus <strong>detail materi ini</strong>?<br>
+                                Tindakan ini tidak dapat dibatalkan.
+                            </p>
+                        </div>
+
+                        <div class="modal-footer border-0 d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">
+                            <i class="bi bi-cross-circle me-1"></i> Batal
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-danger px-4"
+                                    wire:click='hapusMD({{ $md->id }})'
+                                    data-bs-dismiss="modal">
+                                <i class="bi bi-check-circle me-1"></i> Ya, Hapus
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             @else
                 <div class="alert alert-warning mt-4 text-center shadow-sm">
                     <i class="bi bi-exclamation-circle me-2"></i> Tidak ada materi untuk ditampilkan.
@@ -188,41 +231,7 @@
             </div>
         </div>
 
-        <!-- MODAL KONFIRMASI HAPUS -->
-<div class="modal fade" id="modalHapusMateri" tabindex="-1" aria-labelledby="modalHapusMateriLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 shadow">
-
-            <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold text-danger" id="modalHapusMateriLabel">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i> Konfirmasi Hapus
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <p class="mb-0 text-secondary">
-                    Apakah Anda yakin ingin menghapus <strong>detail materi ini</strong>?<br>
-                    Tindakan ini tidak dapat dibatalkan.
-                </p>
-            </div>
-
-            <div class="modal-footer border-0 d-flex justify-content-end gap-2">
-                <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">
-                   <i class="bi bi-cross-circle me-1"></i> Batal
-                </button>
-
-                <button type="button"
-                        class="btn btn-danger px-4"
-                        wire:click='hapusMD({{ $md->id }})'
-                        data-bs-dismiss="modal">
-                    <i class="bi bi-check-circle me-1"></i> Ya, Hapus
-                </button>
-            </div>
-
-        </div>
-    </div>
-</div>
+        
 
     </div>
 </div>
