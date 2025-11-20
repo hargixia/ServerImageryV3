@@ -12,7 +12,7 @@ use App\Models\User;
 class WebPenggunaPage extends Component
 {
     public $data;
-    public $title_list = ["Tambah Pengguna","Edit Pengguna "];
+    public $title_list = ["Tambah Pengguna Baru","Edit Pengguna "];
     public $title="";
     public $status = 0;
     public $user_id,$username, $nama, $tanggal_lahir, $jenis_kelamin, $foto, $password, $cpass, $id_role, $id_bidang;

@@ -60,7 +60,7 @@
                                         <button class="btn btn-sm btn-warning" wire:click="editUser({{ $u->id }})" >
                                             <i class="bi bi-pencil"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-danger" wire:click="deleteUser({{ $u->id }})">
+                                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal" wire:click="deleteUser({{ $u->id }})">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </td>
@@ -176,7 +176,7 @@
                 <button class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle"></i> Batal
                 </button>
-                <button class="btn btn-danger "  type="submit" wire:click="confirmDelete">
+                <button class="btn btn-danger "  type="submit">
                     <i class="bi bi-trash"></i> Hapus
                 </button>
             </div>
