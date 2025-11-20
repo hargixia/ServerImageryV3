@@ -17,9 +17,9 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->timestamps();
 
-            $table->foreignId('id_apps')->constrained('data_apps','id');
-            $table->foreignId('id_bidangs')->constrained('bidangs','id');
-            $table->foreignId('id_authors')->constrained('users','id');
+            $table->foreignId('id_apps')->constrained('data_apps','id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('id_bidangs')->constrained('bidangs','id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('id_authors')->constrained('users','id')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

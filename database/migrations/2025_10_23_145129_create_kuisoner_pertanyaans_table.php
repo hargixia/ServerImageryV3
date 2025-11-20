@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('tipe',['P','N','A']);
             $table->timestamps();
 
-            $table->foreignId('id_materi')->constrained('data_materis','id');
+            $table->foreignId('id_materi')->constrained('data_materis','id')->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('data_rekomendasis',function(Blueprint $table){
