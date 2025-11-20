@@ -8,8 +8,6 @@ use App\Models\role;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
-use Illuminate\Support\Facades\Hash;
-
 class WebPengguna extends Component
 {
 
@@ -18,6 +16,8 @@ class WebPengguna extends Component
     public $data_bidang;
     public $pengguna;
     public $role;
+
+    public $status = 0,$label_status = "Tambah User";
 
     // input tambah
     public $username, $nama, $tanggal_lahir, $jenis_kelamin, $id_role, $id_bidang, $password, $biang_teks;
@@ -31,6 +31,8 @@ class WebPengguna extends Component
     public function mount(){
         $this->data_bidang = bidang::all();
         $this->role = role::all();
+        $this->status = $this->status;
+        $this->label_status = $this->label_status;
     }
 
     public function render()
@@ -52,15 +54,15 @@ class WebPengguna extends Component
             'password' => 'required|min:6',
         ]);
 
-        $parcel = User::create([
-            'username' => $this->username,
-            'nama' => $this->nama,
-            'tanggal_lahir' => $this->tanggal_lahir,
-            'jenis_kelamin' => $this->jenis_kelamin,
-            'password' => base64_encode(base64_encode($this->password)),
-            'id_role' => $this->id_role,
-            'id_bidang' => $this->id_bidang,
-        ]);
+        $parcel = new User();
+        $parcel->username = $this->username;
+        $parcel->nama = $this->nama;
+        $parcel->tanggal_lahir = $this->tanggal_lahir;
+        $parcel->jenis_kelamin = $this->jenis_kelamin;
+        $parcel->password = base64_encode(base64_encode($this->password));
+        $parcel->id_role = $this->id_role;
+        $parcel->id_bidang = $this->id_bidang;
+        $parcel->save();
 
         if($parcel){
             session()->flash('message', 'Pengguna berhasil ditambahkan.');
@@ -82,6 +84,9 @@ class WebPengguna extends Component
         $this->jenis_kelamin_edit = $user->jenis_kelamin;
         $this->id_role_edit = $user->id_role;
         $this->id_bidang_edit = $user->id_bidang;
+
+        $this->status = 1;
+        $this->label_status = "Edit User";
     }
 
     // update pengguna
@@ -97,14 +102,13 @@ class WebPengguna extends Component
         ]);
 
         $user = User::findOrFail($this->user_id);
-        $user->update([
-            'username' => $this->username_edit,
-            'nama' => $this->nama_edit,
-            'tanggal_lahir' => $this->tanggal_lahir_edit,
-            'jenis_kelamin' => $this->jenis_kelamin_edit,
-            'id_role' => $this->id_role_edit,
-            'id_bidang' => $this->id_bidang_edit,
-        ]);
+        $user->username = $this->username_edit;
+        $user->nama = $this->nama_edit;
+        $user->tanggal_lahir = $this->tanggal_lahir_edit;
+        $user->jenis_kelamin = $this->jenis_kelamin_edit;
+        $user->id_role = $this->id_role_edit;
+        $user->id_bidang = $this->id_bidang_edit;
+        $user->save();
 
         session()->flash('message', 'Data pengguna berhasil diperbarui.');
         $this->resetInput();
@@ -114,6 +118,8 @@ class WebPengguna extends Component
     public function deleteUser($id)
     {
         $this->delete_id = $id;
+        $this->status = 3;
+        $this->label_status = "Hapus User";
     }
 
     public function confirmDelete()
@@ -130,5 +136,6 @@ class WebPengguna extends Component
         $this->username = $this->nama = $this->tanggal_lahir = $this->jenis_kelamin = $this->id_role = $this->id_bidang = $this->password = '';
         $this->username_edit = $this->nama_edit = $this->tanggal_lahir_edit = $this->jenis_kelamin_edit = $this->id_role_edit = $this->id_bidang_edit = '';
         $this->user_id = $this->delete_id = null;
+        return redirect("/pengguna");
     }
 }

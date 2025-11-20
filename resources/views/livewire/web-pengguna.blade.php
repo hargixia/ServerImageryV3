@@ -14,7 +14,7 @@
         <div class="container-fluid p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="fw-bold">Manajemen Pengguna</h4>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserModal">
                     <i class="bi bi-person-plus"></i> Tambah Pengguna
                 </button>
             </div>
@@ -57,10 +57,10 @@
                                     </td>
                                     <td>{{ $user->bidang }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-warning" wire:click="editUser({{ $user->id }})" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                        <button class="btn btn-sm btn-warning" wire:click="editUser({{ $user->id }})" data-bs-toggle="modal" data-bs-target="#UserModal">
                                             <i class="bi bi-pencil"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-danger" wire:click="deleteUser({{ $user->id }})" data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+                                        <button class="btn btn-sm btn-danger" wire:click="deleteUser({{ $user->id }})" data-bs-toggle="modal" data-bs-target="#UserModal">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </td>
@@ -76,12 +76,12 @@
             </div>
 </div>
             <!-- Modal Tambah -->
-<form wire:ignore.self class="modal fade" id="addUserModal" tabindex="-1">
+<form @if($status == 0) wire:submit='storeUser' @elseif ($status == 1) wire:submit='updateUser' @else wire:submit='confirmDelete' @endif class="modal fade" id="UserModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content border-0 shadow">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title">
-                    <i class="bi bi-person-plus-fill me-2"></i> Tambah Pengguna
+                    <i class="bi bi-person-plus-fill me-2"></i> {{ $label_status }}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -162,7 +162,7 @@
                 <button class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle"></i> Batal
                 </button>
-                <button class="btn btn-primary" wire:click="storeUser">
+                <button class="btn btn-primary" type="submit" wire:click="storeUser">
                     <i class="bi bi-save"></i> Simpan
                 </button>
             </div>
@@ -244,7 +244,7 @@
                 <button class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle"></i> Batal
                 </button>
-                <button class="btn btn-warning text-white" wire:click="updateUser">
+                <button class="btn btn-warning text-white" type="submit" wire:click="updateUser">
                     <i class="bi bi-save2-fill"></i> Perbarui
                 </button>
             </div>
@@ -269,7 +269,7 @@
                 <button class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle"></i> Batal
                 </button>
-                <button class="btn btn-danger" wire:click="confirmDelete">
+                <button class="btn btn-danger "  type="submit" wire:click="confirmDelete">
                     <i class="bi bi-trash"></i> Hapus
                 </button>
             </div>

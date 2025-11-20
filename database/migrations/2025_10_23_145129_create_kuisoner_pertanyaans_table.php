@@ -22,7 +22,7 @@ return new class extends Migration
         });
 
         Schema::table('data_rekomendasis',function(Blueprint $table){
-            $table->foreignId('id_pertanyaan')->constrained('kuisoner_pertanyaans','id');
+            $table->foreignId('id_pertanyaan')->constrained('kuisoner_pertanyaans','id')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
