@@ -68,6 +68,7 @@ class WebPengguna extends Component
 
         session()->flash('message', 'Pengguna berhasil dihapus.');
 
+        return redirect("/pengguna");
     }
 
 }
