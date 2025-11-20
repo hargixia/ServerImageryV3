@@ -22,6 +22,8 @@ class WebTugas extends Component
     public $t_isi, $status, $file, $nilai;
     public $ctime, $md_s;
     public $kirim = 0;
+    public $ss = 0;
+
 
     public function cek_time($time_val1,$time_val2){
         $this->ctime = date('Y-m-d H:i:s');
@@ -67,10 +69,16 @@ class WebTugas extends Component
             $this->t_isi = $this->dtugas->isi;
             $this->status = $this->dtugas->status;
             $this->nilai = $this->dtugas->nilai;
-            $this->kirim = 1;
         }
 
-        if($this->status == 1 && $arr[3] == 3){
+        $today = date('Y-m-d H:i:s');
+        if($this->materi_detail->stop >= $today){
+            $this->ss = 1;
+        }
+
+        if($this->t_isi == "" ){
+            $this->kirim = 0;
+        }else{
             $this->kirim = 3;
         }
 
@@ -94,7 +102,7 @@ class WebTugas extends Component
         }else{
             $tgs = new data_tugas();
             $tgs->isi = $this->t_isi;
-            $tgs->status = false;
+            $tgs->status = False;
             $tgs->nilai = 0;
             $tgs->id_materi_detail = $this->id;
             $tgs->id_user = Auth::user()->id;
@@ -103,6 +111,9 @@ class WebTugas extends Component
         $this->kembali();
     }
 
+    public function beriNilai($id){
+
+    }
 
     public function render()
     {

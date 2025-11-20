@@ -31,7 +31,7 @@ return new class extends Migration
             $table->dateTime('stop')->nullable();
             $table->timestamps();
 
-            $table->foreignId('id_materi')->constrained('data_materis','id');
+            $table->foreignId('id_materi')->constrained('data_materis','id')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

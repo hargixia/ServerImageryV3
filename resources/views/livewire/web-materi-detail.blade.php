@@ -138,6 +138,43 @@
                         </div>
                     </div>
                 @endforeach
+                <!-- MODAL KONFIRMASI HAPUS -->
+        <div class="modal fade" id="modalHapusMateri" tabindex="-1" aria-labelledby="modalHapusMateriLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-4 shadow">
+
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title fw-bold text-danger" id="modalHapusMateriLabel">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i> Konfirmasi Hapus
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p class="mb-0 text-secondary">
+                            Apakah Anda yakin ingin menghapus <strong>detail materi ini</strong>?<br>
+                            Tindakan ini tidak dapat dibatalkan.
+                        </p>
+                    </div>
+
+                    <div class="modal-footer border-0 d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">
+                        <i class="bi bi-cross-circle me-1"></i> Batal
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-danger px-4"
+                                wire:click='hapusMD({{ $md->id }})'
+                                data-bs-dismiss="modal">
+                            <i class="bi bi-check-circle me-1"></i> Ya, Hapus
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
             </div>
 
             @else
@@ -188,41 +225,5 @@
             </div>
         </div>
 
-        <!-- MODAL KONFIRMASI HAPUS -->
-<div class="modal fade" id="modalHapusMateri" tabindex="-1" aria-labelledby="modalHapusMateriLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 shadow">
 
-            <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold text-danger" id="modalHapusMateriLabel">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i> Konfirmasi Hapus
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <p class="mb-0 text-secondary">
-                    Apakah Anda yakin ingin menghapus <strong>detail materi ini</strong>?<br>
-                    Tindakan ini tidak dapat dibatalkan.
-                </p>
-            </div>
-
-            <div class="modal-footer border-0 d-flex justify-content-end gap-2">
-                <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">
-                   <i class="bi bi-cross-circle me-1"></i> Batal
-                </button>
-
-                <button type="button"
-                        class="btn btn-danger px-4"
-                        wire:click='hapusMD({{ $md->id }})'
-                        data-bs-dismiss="modal">
-                    <i class="bi bi-check-circle me-1"></i> Ya, Hapus
-                </button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-    </div>
 </div>

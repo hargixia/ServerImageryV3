@@ -73,6 +73,18 @@ class app_seed extends Seeder
             'id_bidang'=>1,
         ]);
 
+        User::create([
+            'nama' => 'peserta',
+            'username' => 'peserta',
+            'tanggal_lahir' => '1990-01-01',
+            'jenis_kelamin' => 'L',
+            'foto' => '',
+            'password' => $password,
+            'survey_count' => 0,
+            'id_role' => 3,
+            'id_bidang'=>1,
+        ]);
+
         $kat = [
             'Sangat Rendah',
             'Rendah',

@@ -6,6 +6,8 @@ use App\Models\data_materi_detail;
 use DateTime;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
+
 
 class WebMateriDetailTambah extends Component
 {

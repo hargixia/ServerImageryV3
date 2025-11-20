@@ -18,8 +18,8 @@ return new class extends Migration
         });
 
         Schema::table('users',function(Blueprint $table){
-            $table->foreignId('id_role')->constrained('roles','id');
-            $table->foreignId('id_bidang')->constrained('bidangs','id');
+            $table->foreignId('id_role')->constrained('roles','id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('id_bidang')->constrained('bidangs','id')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
