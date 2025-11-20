@@ -13,6 +13,7 @@ use App\Livewire\WebMateriDetail;
 use App\Livewire\WebMateriDetailTambah;
 use App\Livewire\WebMateriDetailTampil;
 use App\Livewire\WebPengguna;
+use App\Livewire\WebPenggunaPage;
 use App\Livewire\WebPerkembangan;
 use App\Livewire\WebPerkembanganList;
 use App\Livewire\WebRegister;
@@ -44,6 +45,7 @@ route::middleware('auth')->group(function(){
     route::get('/materi/detail/{id}/tugas',WebTugasList::class);
 
     route::get('/pengguna',WebPengguna::class);
+    route::get('/pengguna/d/{data}',WebPenggunaPage::class);
     route::get('pengaturan-akun',WebAkun::class);
 
     route::get('/logout', [WebLogin::class, 'logout']);

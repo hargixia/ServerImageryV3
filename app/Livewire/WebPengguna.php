@@ -17,13 +17,11 @@ class WebPengguna extends Component
     public $pengguna;
     public $role;
 
-    public $status = 0,$label_status = "Tambah User";
+    public $status = 0;
 
     // input tambah
-    public $username, $nama, $tanggal_lahir, $jenis_kelamin, $id_role, $id_bidang, $password, $biang_teks;
-
-    // input edit
-    public $user_id, $username_edit, $nama_edit, $tanggal_lahir_edit, $jenis_kelamin_edit, $id_role_edit, $id_bidang_edit;
+    public $u_id;
+    public $data = [];
 
     // hapus
     public $delete_id;
@@ -31,95 +29,36 @@ class WebPengguna extends Component
     public function mount(){
         $this->data_bidang = bidang::all();
         $this->role = role::all();
-        $this->status = $this->status;
-        $this->label_status = $this->label_status;
     }
 
     public function render()
     {
-        $this->pengguna = User::join('bidangs','bidangs.id','=','id_bidang')->get();
+        $this->pengguna = User::join('bidangs','bidangs.id','=','id_bidang')->select('users.*','bidangs.bidang')->get();
         return view('livewire.web-pengguna');
     }
 
-    // tambah pengguna
-    public function storeUser()
-    {
-        $this->validate([
-            'username' => 'required|unique:users',
-            'nama' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|in:L,P',
-            'id_role' => 'required',
-            'id_bidang' => 'required|integer',
-            'password' => 'required|min:6',
-        ]);
+    public function parcel($mode,$data){
+        $temp = base64_encode("user>>".$mode.">>".$data);
+        return redirect("/pengguna/d/".$temp);
+    }
 
-        $parcel = new User();
-        $parcel->username = $this->username;
-        $parcel->nama = $this->nama;
-        $parcel->tanggal_lahir = $this->tanggal_lahir;
-        $parcel->jenis_kelamin = $this->jenis_kelamin;
-        $parcel->password = base64_encode(base64_encode($this->password));
-        $parcel->id_role = $this->id_role;
-        $parcel->id_bidang = $this->id_bidang;
-        $parcel->save();
-
-        if($parcel){
-            session()->flash('message', 'Pengguna berhasil ditambahkan.');
-        }else{
-            session()->flash('message', 'error');
-        }
-
-        $this->resetInput();
+    public function tambahUser(){
+        $this->parcel("0","0");
     }
 
     // tampil data untuk edit
     public function editUser($id)
     {
         $user = User::findOrFail($id);
-        $this->user_id = $user->id;
-        $this->username_edit = $user->username;
-        $this->nama_edit = $user->nama;
-        $this->tanggal_lahir_edit = $user->tanggal_lahir;
-        $this->jenis_kelamin_edit = $user->jenis_kelamin;
-        $this->id_role_edit = $user->id_role;
-        $this->id_bidang_edit = $user->id_bidang;
-
-        $this->status = 1;
-        $this->label_status = "Edit User";
-    }
-
-    // update pengguna
-    public function updateUser()
-    {
-        $this->validate([
-            'username_edit' => 'required|string',
-            'nama_edit' => 'required|string',
-            'tanggal_lahir_edit' => 'required|date',
-            'jenis_kelamin_edit' => 'required|in:L,P',
-            'id_role_edit' => 'required|in:1,2',
-            'id_bidang_edit' => 'required|integer',
-        ]);
-
-        $user = User::findOrFail($this->user_id);
-        $user->username = $this->username_edit;
-        $user->nama = $this->nama_edit;
-        $user->tanggal_lahir = $this->tanggal_lahir_edit;
-        $user->jenis_kelamin = $this->jenis_kelamin_edit;
-        $user->id_role = $this->id_role_edit;
-        $user->id_bidang = $this->id_bidang_edit;
-        $user->save();
-
-        session()->flash('message', 'Data pengguna berhasil diperbarui.');
-        $this->resetInput();
+        if($user){
+            $this->parcel("1",$user->id);
+        }
     }
 
     // hapus
     public function deleteUser($id)
     {
         $this->delete_id = $id;
-        $this->status = 3;
-        $this->label_status = "Hapus User";
     }
 
     public function confirmDelete()
@@ -128,14 +67,7 @@ class WebPengguna extends Component
         $user->delete();
 
         session()->flash('message', 'Pengguna berhasil dihapus.');
-        $this->resetInput();
+
     }
 
-    private function resetInput()
-    {
-        $this->username = $this->nama = $this->tanggal_lahir = $this->jenis_kelamin = $this->id_role = $this->id_bidang = $this->password = '';
-        $this->username_edit = $this->nama_edit = $this->tanggal_lahir_edit = $this->jenis_kelamin_edit = $this->id_role_edit = $this->id_bidang_edit = '';
-        $this->user_id = $this->delete_id = null;
-        return redirect("/pengguna");
-    }
 }
