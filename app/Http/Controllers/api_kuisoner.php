@@ -7,11 +7,10 @@ use App\Models\data_kuisoner;
 use App\Models\kuisoner_pertanyaan;
 use App\Models\kuisoner_jawab;
 use App\Models\data_materi;
-use App\Models\data_materi_detail;
 use App\Models\data_rekomendasi;
 use App\Models\kuisoner_jawaban;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\api_support;
 use App\Models\data_kategori;
 
 class api_kuisoner extends Controller
@@ -100,7 +99,9 @@ class api_kuisoner extends Controller
     }
 
     public function kuisoner_jawab($data){
-        $data = Controller::deco($data);
+        $as = new api_support();
+
+        $data = $as->deco($data);
         $c_data = count($data);
         if($data[0] == "kj"){
 
@@ -113,7 +114,7 @@ class api_kuisoner extends Controller
             $cApps = data_app::where('id',$cMateri->id_apps)->get()->first();
 
             for($i=4;$i<$c_data;$i++){
-                $temp = Controller::splitterv2($data[$i]);
+                $temp = $as->splitterv2($data[$i]);
                 $temp_reko = data_rekomendasi::where('id_pertanyaan',$temp[0])->get()->first();
                 $temp_tipe = kuisoner_pertanyaan::where('id',$temp[0])->get()->first();
                 $cnilai = (int)$temp[1] + 1;
