@@ -105,6 +105,13 @@ class WebMateriDetail extends Component
         return redirect("/materi/detail/".$this->id);
     }
 
+    public function tutupTugas($id){
+        data_materi_detail::where('id', $id)->update([
+            'exp' => 1
+        ]);
+        return redirect("/materi/detail/".$this->id);
+    }
+
     public function materiTampil($idmd){
         if($idmd != ""){
             return redirect('/materi/detail/'.$this->id.'/tampil/'.$idmd);
