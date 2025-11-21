@@ -10,6 +10,7 @@ use Livewire\Component;
 
 use App\Http\Controllers\api_kuisoner;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Livewire\Attributes\Title;
 
 class WebMateriDetail extends Component
@@ -102,6 +103,10 @@ class WebMateriDetail extends Component
     }
 
     public function hapusMD($id){
+        $md = data_materi_detail::where('id', $id)->get()->first();
+        $filename = $md->filename;
+        $tipe = $md->tipe;
+        File::delete(public_path('storage//'.$tipe."/".$filename));
         data_materi_detail::where('id', $id)->delete();
         return redirect("/materi/detail/".$this->id);
     }

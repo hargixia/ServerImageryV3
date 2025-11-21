@@ -23,6 +23,7 @@ return new class extends Migration
                 'file'
             ]);
             $table->longText('isi');
+            $table->longText('filename')->nullable();
 
             $table->boolean('tugas');
             $table->longText('isi_tugas')->nullable();

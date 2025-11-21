@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\data_materi_detail;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Title;
@@ -21,10 +22,6 @@ class WebMateriDetailTambah extends Component
     public $tugasBool = False;
     public $tugas_exp, $tugas_start_date, $tugas_start_time, $tugas_stop_date, $tugas_stop_time, $isi_tugas;
     public $start_combine, $stop_combine;
-
-    protected $rules = [
-        'detail_file' => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:102400'
-    ];
 
 
     public $tipe_pilih = '';
@@ -44,10 +41,12 @@ class WebMateriDetailTambah extends Component
 
     public function tambahMateri(){
 
+        $md = new data_materi_detail();
+        $today = date("Ymd-His");
         $isian = "";
         if($this->tipe_pilih != $this->tipe_list[$this->tipe_default]){
-            $this->validateOnly('detail_file');
-            $nama_file = $this->detail_file->getClientOriginalName();
+            $nama_file = $this->id . "_"  . Auth::user()->id . "_" . $this->tipe_pilih . "_" . $today . "." .$this->detail_file->getClientOriginalExtension();
+            $md->filename = $nama_file;
             $this->detail_file->storeAs(path: $this->tipe_pilih, name:$nama_file, options:'uploads');
             $isian = config('app.url') . "/storage//".$this->tipe_pilih."/" . $nama_file;
         }else{
@@ -62,7 +61,7 @@ class WebMateriDetailTambah extends Component
         $this->start_combine->setTimestamp($start_temp);
         $this->stop_combine->setTimestamp($stop_temp);
 
-        $md = new data_materi_detail();
+
         $md->judul = $this->detail_judul;
         $md->deskripsi = $this->detail_deskripsi;
         $md->tipe = $this->tipe_pilih;

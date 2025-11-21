@@ -16,16 +16,16 @@
                     <form wire:submit.prevent="updateFoto" class="text-center mb-4">
                         <div class="position-relative d-inline-block">
 
-                            <img 
+                            <img
                                 src="{{ asset('images/profile.png') }}"
                                 id="previewFoto"
                                 class="rounded-circle shadow"
                                 width="150" height="150">
 
-                            <label 
+                            <label
                                 class="btn btn-sm rounded-circle position-absolute bottom-0 end-0 d-flex align-items-center justify-content-center"
                                 style="width: 40px; height: 40px; background:white; border:1px solid #ddd;">
-                                
+
                                 <i class="bi bi-camera fs-6 text-dark"></i>
                                 <input type="file" class="foto-edit" id="fotoInput" wire:model="new_foto" accept="image/*" hidden>
                             </label>
@@ -65,7 +65,7 @@
                         <div class="mt-4 text-end">
                             <button type="button" class="btn btn-primary me-2" id="btnEditInfo">Edit Profil</button>
                             <button type="button" class="btn btn-secondary me-2 d-none" id="btnCancelInfo">Batal</button>
-                            <button type="submit" class="btn btn-success d-none" id="btnSaveInfo">Simpan Perubahan</button>
+                            <button type="submit" class="btn btn-success d-none" id="btnSaveInfo" >Simpan Perubahan</button>
                         </div>
                     </form>
 
