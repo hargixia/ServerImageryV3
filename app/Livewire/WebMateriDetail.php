@@ -55,7 +55,7 @@ class WebMateriDetail extends Component
         $ak = new api_kuisoner();
         $idu = Auth::user()->id;
         $data = "kc>>".$id.">>".$idu;
-        $kc = json_decode($ak->kuisoner_cek(base64_encode($data)));
+        $kc = json_decode($ak->kuisoner_cek(base64_encode($data)))[0];
 
         $materi = data_materi::find($this->id);
         $app = data_app::find($materi->id_apps);
@@ -86,10 +86,12 @@ class WebMateriDetail extends Component
             array_push($this->md_exp,$md->exp);
         }
 
-        if($kc->msg == $this->mode && $this->user_edit == false){
-            $this->lakukanTest();
-        }else{
-            $this->mode = "PostTest";
+        if($kc->code != 404){
+            if($kc->msg == $this->mode && $this->user_edit == false){
+                $this->lakukanTest();
+            }else{
+                $this->mode = "PostTest";
+            }
         }
 
     }

@@ -88,14 +88,15 @@ class api_auth extends Controller
                 $password = base64_encode($arr[6]);
 
                 try{
-                    $parcel = User::create([
-                        'username'      => $arr[1],
-                        'nama'          => $arr[2],
-                        'tanggal_lahir' => $tgl_lahir,
-                        'jenis_kelamin' => $arr[4],
-                        'id_bidang'     => $arr[5],
-                        'password'      => base64_encode($password),
-                    ]);
+                    $parcel = new User();
+                    $parcel->username =  $arr[1];
+                    $parcel->nama = $arr[2];
+                    $parcel->tanggal_lahir = $tgl_lahir;
+                    $parcel->jenis_kelamin = $arr[4];
+                    $parcel->id_bidang = $arr[5];
+                    $parcel->id_role = 3;
+                    $parcel->password = base64_encode($password);
+                    $parcel->save();
                     if($parcel){
                         $code = 0;
                         $res = "Register Berhasil>>" . json_encode($parcel);

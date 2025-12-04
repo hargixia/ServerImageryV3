@@ -3,6 +3,7 @@
 use App\Http\Controllers\api_auth;
 use App\Http\Controllers\api_materi;
 use App\Http\Controllers\api_kuisoner;
+use App\Http\Controllers\api_perkembangan;
 use App\Livewire\WebAkun;
 use App\Livewire\WebDashboard;
 use App\Livewire\WebKuisonerTambah;
@@ -58,3 +59,5 @@ route::get('/api/materi_detail/{data}',[api_materi::class , 'materi_detail']);
 route::get('/api/kuisoner_cek/{data}',[api_kuisoner::class , 'kuisoner_cek']);
 route::get('/api/kuisoner_pertanyaan/{data}',[api_kuisoner::class , 'kuisoner_pertanyaan']);
 route::get('/api/kuisoner_jawab/{data}',[api_kuisoner::class , 'kuisoner_jawab']);
+
+route::get('/api/perkembangan/{data}',[api_perkembangan::class,'perkembangan_user']);

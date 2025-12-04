@@ -40,18 +40,32 @@ class api_materi extends Controller
             'msg' => $msg,
             'res' => $res
         ];
-        return json_encode($data);
+        return json_encode(array($data));
     }
 
     public function materi($data){
-        $data = base64_decode($data);
-        if($data == "m"){
+        $data = $this->deco($data);
+        if($data[0] == "m"){
             if(true){
-                $materi = data_materi::all();
-                $code = 1;
-                $msg = "Data Materi Ditemukan";
-                $res = $materi;
-                return $this->retuner($code,$msg,$res);
+                if($data[1]=='a'){
+                    $materi = data_materi::all();
+                    $code = 1;
+                    $msg = "Data Materi Ditemukan";
+                    $res = $materi;
+                    return $this->retuner($code,$msg,$res);
+                }elseif($data[1]=='1'){
+                    $materi = data_materi::where('id_apps','1')->get();
+                    $code = 1;
+                    $msg = "Data Materi Ditemukan";
+                    $res = $materi;
+                    return $this->retuner($code,$msg,$res);
+                }elseif($data[1]=='2'){
+                    $materi = data_materi::where('id_apps','2')->get();
+                    $code = 1;
+                    $msg = "Data Materi Ditemukan";
+                    $res = $materi;
+                    return $this->retuner($code,$msg,$res);
+                }
             }else{
                 $msg = "Data Materi Tidak Ditemukan";
                 $res = "-";

@@ -90,7 +90,7 @@ class WebKuisonerTes extends Component
         }
 
         $sender = "kj>>" . $this->id . ">>" . Auth::user()->id . ">>" . $this->mode . ">>" . $jawab_kirim;
-        $data = json_decode($api->kuisoner_jawab(base64_encode($sender)));
+        $data = json_decode($api->kuisoner_jawab(base64_encode($sender)))[0];
         $this->kirim = json_encode($data);
         $this->nilai = json_encode($data->res[0]->nilai);
         $this->rekomendasi = json_encode($data->res[0]->rekomendasi);

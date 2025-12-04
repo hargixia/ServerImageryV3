@@ -35,7 +35,7 @@
                     <p>Nilai Anda adalah {{$nilai}}</p>
                     <p>Dengan Kategori {{$kategori}}</p>
                     <hr>
-                    @if ($rekomendasi == "")
+                    @if ($rekomendasi != "")
                         <p>Anda direkomendasikan : {{$rekomendasi}}</p>
                         <p></p>
                     @endif
